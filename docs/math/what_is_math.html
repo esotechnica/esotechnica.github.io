@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-GB" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <base href="https://esotechnica.com">
+	<title>What is mathematics?</title>
+    <script>
+        MathJax = {
+          tex: {
+        	  macros: {
+        		   uvec: ["{\\mathbf #1}", 1],
+        		   bvec: ["{\\mathbf #1}", 1],
+                   avec: ["{\\vec #1}", 1]
+        	  }
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<h1 class="site_banner" title="Esotechnica"><span onclick="location.href = '#';" style="cursor: pointer">&#8714;&int;&empty;&#8868;&#8714;&sub;&#8463;&#8469;|&sub;&and;&gt;&nbsp;&#9632;</span></h1>
+	<p class="site_description">my  $misc::nerdy-&gt;stuff</p>
+	<a href="cgi-bin/edit2.php?page=docs%2Fmath%2Fmath_found_intro.html"><img class="edit_icon" src="img/edit.png" height="20px" width="20px"></a>
+	
+	<div id="main_content" class="article">
+        <h1>What is mathematics?</h1>
+        
+        <p class="has-drop-cap">On the definition of the term <em>mathematics</em>, there seems to be no universal agreement. This is partly because the depth and scope of mathematics has expanded over the centuries, especially with the insights into its foundations during the late 19<sup>th</sup> and early 20<sup>th</sup> centuries. It is not simply about numbers and measurement, geometry and space, algebra and calculus. These are some examples of <em>fields</em> of mathematics, applications of mathematical enquiry to address a particular problem domain. In any case, there is little to be gained from trying to give this word a definition. Rather, an understanding of the nature of mathematics would be more illuminating. This article attempts to provide such an insight, by showing why mathematics is such a unique discipline, how logic underpins its foundations, and how it may provide answers to the deepest questions in science and philosophy.<span id="more-71"></span></p>
+        
+        <blockquote style="margin-left: 0;">
+        <p>All Mathematics is Symbolic Logic</p>
+        <cite>Bertrand Russell, 1903</cite></blockquote>
+        
+        <p>In ancient times, mathematics was a useful tool for creating abstract models of the properties of, and relationships between, objects observed in the real world. The earliest example of this was the concept of <em>quantity</em>. Prehistoric humans recognised a certain property shared between, say, the fingers on one hand, the toes on one foot, and the petals of a geranium. Numbers were invented for communicating this concept, with the number &#8216;five&#8217; being used to identify the shared property in the aforementioned scenario. Arithmetic followed, out of the necessity for calculation in matters of trade and taxation. The advent of the Babylonian sexagesimal (base 60) number system was the first positional number system, greatly simplifying and speeding up the process of calculation. Primitive forms of algebra and geometry arose in response to the increase in societal and technological complexity, especially in the disciplines of navigation, engineering and astronomy.</p>
+        
+        
+        
+        <p>The development of ancient mathematics was driven by the desire to efficiently find solutions to everyday practical problems. Whether it was calculating the amount of change you should receive from a purchase, or building the Pyramids, mathematics was firmly grounded in the real world. But prior to the mathematics of the Greeks, early mathematics did not resemble the rigorous nature of the mathematics of today. These discoveries were more like mathematical &#8216;rules of thumb&#8217;; recipes that seemed to work effectively, because they produced correct answers time and time again, without fail. A deeper understanding of why they worked was less important. In this sense, pre-Greek mathematics was primarily based on <em>inductive reasoning</em>. Observing that the formula for calculating the area of a circle worked effectively in every case seen so far, the formula was accepted as universally valid. That is, it will work for any circle that may ever be conceived, now and forever, anywhere in the world.</p>
+        
+        <figure style="width: 330px" class="alignright"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Rhind_Mathematical_Papyrus.jpg" alt="Rhind Mathematical Papyrus" width="330" height="198" /><figcaption>Rhind Mathematical Papyrus, one of the most important archaeological finds on Egyptian mathematics.</figcaption></figure>
+        
+        <p>Inductive reasoning is the basis of modern science. It relies on observation of phenomena to support a particular hypothesis. Europeans up until the end of the 17<sup>th</sup> century had come to the conclusion, via inductive reasoning, that all swans were white. This was not an unreasonable conclusion to make. All swans observed thus far by Europeans, since the beginning of history, were white. But the fragility of inductive reasoning is that one counterexample will bring the entire hypothesis crashing down instantly. This is, of course, what happened with the &#8216;white swan&#8217; theory, when black swans were discovered in Australia. At best, inductive reasoning is a level of confidence, a probability, but never a certainty.</p>
+        
+        
+        
+        <p>But what if you could develop a system of reasoning that ensured you could reach an unassailable conclusion? One in which you could prove a hypothesis (known in mathematics as a <em>conjecture</em>) to be true? And it would forever be true, and had always been true? And it would not be possible ever to disprove it? Such a system, known as <em>deductive reasoning</em>, was developed over time by the ancient Greeks. A system of deductive reasoning is defined by its <em>rules of inference</em>. In essence, a rule of inference generates a new truth from previously established truths. The previously established truths form the <em>premises </em>of the rule, and the newly generated truth is known as the <em>conclusion</em>.</p>
+        
+        
+        
+        <p>To give an example, let&#8217;s examine the rule of inference known as <em>modus ponens</em>. This rule encapsulates a simple deduction that seems to require no justification. It is sometimes written like this: \[{ \begin{array}{l} \text{If A, then B}\\ \text{A}\\ \hline \text{B} \end{array} }\]</p>
+        
+        
+        
+        <p>The statements above the line represent the premises, and the statement below the line is the conclusion. If we assert that the premises are true, then the conclusion must be true. The variables A and B can be substituted with any logical statement; a statement that must be either true or false. Let \(A\) be the statement &#8220;It is raining&#8221; and \(B\) be the statement &#8220;The grass is wet&#8221;. We then get: \[{ \begin{array}{l} \text{If it is raining, then the grass is wet}\\ \text{It is raining}\\ \hline \text{The grass is wet} \end{array} }\]</p>
+        
+        
+        
+        <p>The power of deductive reasoning comes from being able to chain together a series of inferences into a <em>deductive argument</em>. That is, the conclusion of one inference becomes a premise of the next inference in the chain. In the next article of this series, a real deductive system known as <em>natural deduction</em> will be explored.</p>
+        
+        
+        
+        <p>Using deductive logic as a basis, mathematics essentially becomes a sort of game. Each field of mathematics begins by declaring its initial premises, those statements that are assumed to be true without justification. These are known as the <em>axioms</em> of the system. Using the machinery provided by the rules of inference, we can input these axioms into chains of inference, discovering new truths along the way. These new truths become <em>theorems</em> of the system. This is the daily life of the working mathematician; to understand what a system is capable of by discovering theorems of that system.</p>
+        
+        <figure style="width: 206px" class="alignleft"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg" alt="Rhind Mathematical Papyrus" width="206" height="275" /><figcaption>Greek philosopher Aristotle, considered to be the father of logic</figcaption></figure>
+        
+        <p>One of the earliest examples of applying an axiomatic approach to mathematics was Euclid&#8217;s <em>Elements</em>. This text on geometry and number theory became the authoritative reference on the subject for thousands of years. All of the theorems contained within were proven, via deductive logic, from carefully crafted definitions and postulates that formed the axioms of the system. For example, in Euclid&#8217;s treatment of geometry, the basic primitives of the system, such as points, lines and planes, were defined. From these simple definitions, more complex objects such as triangles and other polygons could be constructed. Furthermore, all of the theorems of geometry, such as Pythagoras&#8217; theorem, could be proven. This axiomatisation of geometry was taught for thousands of years, and is still taught in some schools today as a first exposure to deductive reasoning.</p>
+        
+        
+        
+        <p>The development of deductive reasoning gave mathematics a unique status amongst the sciences; its theorems, once proven, could never be disputed, so long as one accepted the truth of the axioms. This is in contrast with all other sciences, whose theories may be accepted as truth for hundreds of years, only to be discarded and replaced almost overnight by new theories once new evidence comes to light.</p>
+        
+        
+        
+        <p>After the fall of the Roman Empire, Europe entered a period of mathematical stagnation throughout the Dark Ages. While much of the Greek works on mathematics were lost to Europe, they were preserved by the Arabic cultures in the Middle East. During this time, deductive reasoning was pursued in the development of algebra, analytic geometry and the precursors to calculus.</p>
+        
+        
+        
+        <p>During the Renaissance, the mathematics of the Islamic world slowly started gaining influence in Europe. This led to an explosion in the development of new mathematics, such as the infinitesimal calculus of Newton and Leibniz, Descartes&#8217; analytical geometry, probability, complex numbers and much more. Despite this, there was little development and refinement of the deductive logic on which this mathematics was based until the beginning of the 19<sup>th</sup> century. Logical arguments in mathematics were, prior to this time, constructed in natural language (such as Latin or English). However, natural language is a poor basis for making precise, rigorous statements. Fraught with ambiguity and ill-defined or circular definitions, not to mention being long-winded and difficult to follow, proofs in natural language may suffer from being inconsistent or invalid in subtle ways that are difficult to detect.</p>
+        
+        <figure style="width: 206px" class="alignright"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg" alt="Isaac Newton" width="206" height="275" /><figcaption><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Christoph_Bernhard_Francke_-_Bildnis_des_Philosophen_Leibniz_%28ca._1695%29.jpg" alt="Gottfried Leibniz" width="206" height="275" />Newton (top) and Leibniz, the independent developers of differential and integral calculus</figcaption></figure>
+        
+        <p>Such an issue arose after the development of infinitesimal calculus. Many criticised the concept of an infinitesimal &#8211; an infinitely small quantity &#8211; as being nonsensical. The most well-known of these criticisms was bishop George Berkeley&#8217;s dismissal of infinitesimals as &#8220;the ghosts of departed quantities&#8221;. The criticism was well-founded. The proofs within calculus at some places treated infinitesimals as small yet non-zero values, and at other places they were considered to have no value at all. How can a value be both zero and non-zero at the same time?</p>
+        
+        
+        
+        <p>It wasn&#8217;t for another 150 years that calculus was placed on a rigorous foundation, by clearly defining many concepts that were rather vaguely defined or not defined at all. For example, there existed no satisfactory definition of what a function or a real number was. The work of Cauchy and Weierstrass in the 1800&#8217;s developed a solid foundation for calculus based on the rigorously-defined concepts of <em>limit</em> and <em>continuity</em>, eliminating the need for infinitesimals. But it became clear that deductive logic needed a formal, precise and concise language of its own that avoided the pitfalls of natural language.  It should be noted that attempts at such a system were made prior to the modern development of logic which began in the early to mid-19<sup>th</sup> century. But mostly these systems went unnoticed, were underdeveloped, or were abandoned.</p>
+        <p>The publication of George Boole&#8217;s <em>Mathematical Analysis of Logic</em> in 1847 spurred the development of <em>symbolic logic,</em> a major step towards a formal system of logic.  Boole developed an &#8216;algebra of logic&#8217; by using symbolic variables and operators to manipulate logical statements.  This same algebra (now known as <em>Boolean algebra</em>) could be applied both to a logic of <em>sets</em> and to a logic of <em>propositions</em>. </p>
+        <figure style="width: 206px" class="wp-caption alignleft"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/George_Boole_color.jpg" alt="George Boole" width="206" height="275" /><figcaption class="wp-caption-text">George Boole</figcaption></figure>
+        <p>The logic of sets is a system that allows us to make logical deductions about collections of objects, known as <em>sets</em>.  Each set contains zero or more objects, known as the <em>elements</em> of the set.  Boole derived his logic of sets from Aristotle&#8217;s syllogistic logic.  The operations on sets include the familiar operations of union, intersection and complement, and introduce the concept of the <em>empty set</em> (a set containing <em>no</em> elements) and the <em>universe</em> (a set containing <em>every</em> element).  </p>
+        <p>The logic of propositions studies the truth of propositions.  A proposition is a statement that is either true or false. Boole&#8217;s logic of propositions derives from the propositional logic of the Stoics.   It allows us to deconstruct complex or <em>compound</em> propositions into simpler <em>atomic</em> propositions connected by logical operators.  These operators include <em>AND</em>, <em>OR</em> and <em>NOT</em>. </p>
+        <p>To provide a concrete example, let&#8217;s show how the logic of propositions can be developed algebraically, what is today called <em>propositional logic</em> or the <em>propositional calculus</em>.  This is an algebra of truth, so we only require two values: true and false.  These are typically represented as the numbers 1 and 0 respectively.  We then define two binary operators (operators that take two values or operands) called AND \(\land\))and OR \(\lor\)).  We also define one unary (single operand) operator called NOT \(\neg\)).  These operators will yield a truth value depending on the truth value of the operands.  Let P and Q represent two propositions.  We can define the meaning of each logical operation in the table below:</p>
+        <p></p>
+        <table>
+        <tbody>
+        <tr>
+        <th>Operation</th>
+        <th>Result</th>
+        </tr>
+        <tr>
+        <td>\(P \land Q\)</td>
+        <td>Yields a true value <em>only</em> when both P and Q are true, otherwise false.</td>
+        </tr>
+        <tr>
+        <td>\(P \lor Q\)</td>
+        <td>Yields a false value <em>only</em> when both P and Q are false, otherwise true.</td>
+        </tr>
+        <tr>
+        <td>\(\neg P\)</td>
+        <td>Yields the opposite truth value of P.  When P is true, \(\neg P\) is false.  When P is false,  \(\neg P\) is true.</td>
+        </tr>
+        </tbody>
+        </table>
+        <p></p>
+        <p>This allows an algorithmic calculation of the truth of a complex proposition, such as \(P \land \neg (\neg P \lor Q)\) knowing the truth values of the component propositions P and Q.  Boole presented a set of axioms in his new algebra, making it possible to prove new logical theorems from existing ones, and to demonstrate logical equivalences between propositional formulae.</p>
+        <div class="of_table">
+        <table>
+        <tbody>
+        <tr>
+        <td><i>a</i> ∨ (<i>b</i> ∨ <i>c</i>) = (<i>a</i> ∨ <i>b</i>) ∨ <i>c</i></td>
+        <td><i>a</i> ∧ (<i>b</i> ∧ <i>c</i>) = (<i>a</i> ∧ <i>b</i>) ∧ <i>c</i></td>
+        <td>Associativity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∨ <i>b</i> = <i>b</i> ∨ <i>a</i></td>
+        <td><i>a</i> ∧ <i>b</i> = <i>b</i> ∧ <i>a</i></td>
+        <td>Commutativity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∨ (<i>a</i> ∧ <i>b</i>) = <i>a</i></td>
+        <td><i>a</i> ∧ (<i>a</i> ∨ <i>b</i>) = <i>a</i></td>
+        <td>Absorption</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∨ 0 = <i>a</i></td>
+        <td><i>a</i> ∧ 1 = <i>a</i></td>
+        <td>Identity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∨ (<i>b</i> ∧ <i>c</i>) = (<i>a</i> ∨ <i>b</i>) ∧ (<i>a</i> ∨ <i>c</i>)  </td>
+        <td><i>a</i> ∧ (<i>b</i> ∨ <i>c</i>) = (<i>a</i> ∧ <i>b</i>) ∨ (<i>a</i> ∧ <i>c</i>)  </td>
+        <td>Distributivity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∨ ¬<i>a</i> = 1</td>
+        <td><i>a</i> ∧ ¬<i>a</i> = 0</td>
+        <td>Complements</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <p>For example, De Morgan&#8217;s law can be proven from the axioms.  This law states that for any two propositions P and Q, making the statement &#8220;It is not true that P and Q are both true&#8221; is the same as saying &#8220;Either P is false or Q is false&#8221;.  In algebraic form, where the \(\equiv\) symbol represents logical equivalence:</p>
+        <p>\[\neg(A \land B) \equiv \neg A \lor \neg B\]</p>
+        <p>The same algebraic structure also models the logic of sets.  Rather than AND, OR and NOT, we have the analogous operations of intersection (\(\cup\)), union (\(\cap\)), and complement (~).  Boole also used the number 0 to represent the empty set, and 1 to represent the universe.  In modern times, the symbols \(\varnothing\) (for the empty set), and <em>U</em> (for the universe) are more commonly used.  Note how the axioms are of exactly the same form, showing the symmetry between these two different domains of logic</p>
+        <div class="of_table">
+        <table>
+        <tbody>
+        <tr>
+        <td><i>a</i> ∪ (<i>b</i> ∪ <i>c</i>) = (<i>a</i> ∪ <i>b</i>) ∪ <i>c</i></td>
+        <td><i>a</i> ∩ (<i>b</i> ∩ <i>c</i>) = (<i>a</i> ∩ <i>b</i>) ∩ <i>c</i></td>
+        <td>Associativity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∪ <i>b</i> = <i>b</i> ∪ <i>a</i></td>
+        <td><i>a</i> ∩ <i>b</i> = <i>b</i> ∩ <i>a</i></td>
+        <td>Commutativity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∪ (<i>a</i> ∩ <i>b</i>) = <i>a</i></td>
+        <td><i>a</i> ∩ (<i>a</i> ∪ <i>b</i>) = <i>a</i></td>
+        <td>Absorption</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∪ ∅ = <i>a</i></td>
+        <td><i>a</i> ∩ U = <i>a</i></td>
+        <td>Identity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∪ (<i>b</i> ∩ <i>c</i>) = (<i>a</i> ∪ <i>b</i>) ∩ (<i>a</i> ∪ <i>c</i>)  </td>
+        <td><i>a</i> ∩ (<i>b</i> ∪ <i>c</i>) = (<i>a</i> ∩ <i>b</i>) ∪ (<i>a</i> ∩ <i>c</i>)  </td>
+        <td>Distributivity</td>
+        </tr>
+        <tr>
+        <td><i>a</i> ∪ ~<i>a</i> = U</td>
+        <td><i>a</i> ∩ ~<i>a</i> = ∅</td>
+        <td>Complements</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+        <p>Boole&#8217;s algebra of logic has significant application in the field of computer science.  Computers are essentially an arrangement of &#8216;logic gates&#8217;, electrical circuitry that mimics the operations of Boolean algebra.  Therefore, Boolean algebra is used in designing and simplifying such systems.</p>
+        <p>Boole demonstrated that logic can be modelled as a mathematical structure, making it a mathematical branch of study in its own right.  Later, many mathematicians were considering a seemingly inverse question; is mathematics just an extension of logic?  That is, can all branches of mathematics essentially be reduced to a finite number of axioms written in symbolic form?  What were these axioms?  And are there primitive mathematical objects that could be considered the &#8216;atoms&#8217; of mathematics, from which all other complex mathematical objects could be constructed?  The latter hypothesis had been supported by observations made by Richard Dedekind.  More sophisticated sets of numbers, such as the rationals, reals and complex numbers, could ultimately be derived from the naturals.  At the same time, Georg Cantor was constructing an axiomatic &#8216;theory of sets&#8217; capable of constructing arithmetic objects from sets.  Perhaps sets were the atoms of mathematics?</p>
+        <figure style="width: 206px" class="wp-caption alignright"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Young_frege.jpg" alt="Gottlob Frege" width="206" height="278" /><figcaption class="wp-caption-text">Gottlob Frege</figcaption></figure>
+        <p>The mathematical school of thought known as <em>logicism</em> pursued the goal of reducing all mathematics to a set of logical axioms.  The birth of this movement began with the publication of the <i>Begriffsschrift </i>in 1879, by the German mathematician Gottlob Frege.  In this book, Frege outlined the details of his new system of deductive logic, which today is recognised as the first formulation of <em>predicate logic</em>.  Frege&#8217;s system unified set logic and propositional logic into a single deductive system, by introducing <em>predicates</em> and <em>quantifiers</em>.  Predicates are truth functions, whose parameters can be any element within the universe.  The predicate returns a truth value that is dependant on the parameters passed to it.  For example, if we define our universe U to be all people who have ever lived, we could define a predicate P as follows:</p>
+        <p style="padding-left: 40px;">P(x,y,z) = &#8220;x&#8217;s mother is y and x&#8217;s father is z&#8221;</p>
+        <p>In essence, predicates are just parameterised propositions, templates for a logical truth that are instantiated by substituting the predicate&#8217;s parameters with elements from <em>U</em>. </p>
+        <p>Quantifiers are logical operators that allow us to make statements about groups of elements within the universe.  The universal quantifier (\(\forall\)) allows us to assert that a logical expression is true for all elements of the universe.  The existential quantifier (\(\exists\)) asserts that a logical expression is true for some (one or more) elements within the universe.  For example, if the predicate A(x) is true for all elements x within the universe, and the predicate B(x) is true for at least one element within the universe, we would write:</p>
+        <p style="padding-left: 40px;">\(\forall x(A(x))\)<br />\(\exists x(B(x))\)</p>
+        <p>The development of predicate logic allows the unambiguous and concise expression of statements that were troublesome to define in natural language.  For example, the statement &#8220;Everyone likes someone&#8221; is ambiguous in its meaning.  Does this mean that there is one person that everyone likes?  Or does each person like someone uniquely, such that each person only has one object of affection?  Or is it somewhere in between these two extremes?  Predicate logic can make a statement more precise.  Let the predicate P be defined as P(x,y) = &#8220;x likes y&#8221;.  The initial proposition that everyone likes someone could be written as:</p>
+        <p>\[\forall x(\exists y(P(x,y))\]</p>
+        <p>If we want to convey the meaning that there is one person that everyone likes, we could express it thus:</p>
+        <p>\[\exists y(\forall x(P(x,y)))\]</p>
+        <p>If we wanted to convey that each person only has a single object of affection, a more complex predicate is required.</p>
+        <p>\[\forall x(\exists y(P(x,y) \land \forall z(P(x,z) \to y = z))\]</p>
+        <p>During the late 19<sup>th</sup> century, efforts were made to axiomatise natural number arithmetic.  These included efforts by Hermann Grassmann, C.S Pierce, and Richard Dedekind.  This culminated in the 1899 publication by the Italian mathematician Giuseppe Peano of his axioms, which became known as <em>Peano arithmetic.</em>  This formulation is now the standard theory of natural number arithmetic (with minor modifications) in use today.</p>
+        <figure style="width: 213px" class="wp-caption alignleft"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Giuseppe_Peano.jpg" alt="Giuseppe Peano" width="213" height="270" /><figcaption class="wp-caption-text">Giuseppe Peano</figcaption></figure>
+        <p>Frege&#8217;s follow up publication, the two-volume <em>Grundgesetze der Arithmetik</em> (Basic Laws of Arithmetic) attempted to develop its own axiomatic theory of natural number arithmetic.  Unfortunately, a problem was identified with one of Frege&#8217;s axioms (Basic Law V) which led Frege&#8217;s system of logic to be inconsistent.  A logical system is inconsistent when we can prove a contradiction: when a logical statement and its negation can be both shown to be true.  That is, for some proposition P, both P and \(\neg P\) are true.  This inconsistency was discovered by Bertrand Russell just as the <em>Grundgesetze</em> was being printed, and became known as <em>Russell&#8217;s paradox</em>.  To summarise the situation, Frege&#8217;s system allowed one to construct a set based on some predicate P.  In essence, it contained the following logical axiom:\[\exists y(\forall x(x \in y \iff P(x)))\] </p>
+        <p>This is read as &#8220;There exists a set y [\(\exists y\)], such that for all x [\(\forall x\)], x is an element of y [\(x \in y\)]if and only if [\(\iff\)] P(x) is true&#8221;.  The predicate \(\in\) is a primitive binary predicate introduced as a non-logical symbol into the deductive system.  The meaning of this operator is defined by the axioms, such that \(x \in y\) is true when the element x is contained within the set y.  The logical equivalence operation \(a \iff b\) is true only when the truth values of a and b are the same. </p>
+        <figure style="width: 226px" class="alignright"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Bertrand_Russell_1957.jpg" alt="Bertrand Russell" width="226" height="285" /><figcaption>Bertrand Russell</figcaption></figure>
+        <p>This axiom, which has come to be known as the <em>axiom of unrestricted comprehension, </em>encapsulates our intuitive notion that the members of a set are defined by some property P.  For example, we can conceive of a set of all ripe bananas, or  the set of all words in English, or the set of all romantic relationships that have ever occurred.  These sets are defined by properties that can be encoded in predicates.  P may be defined as &#8220;x is a ripe banana&#8221;, &#8220;x is an English word&#8221;, and &#8220;x is romantic relationship&#8221;.  But in a formal deductive system, these predicates must be constructed using only logical symbols.  Russell crafted a predicate that ultimately leads to a contradiction.  The predicate was:</p>
+        <p>\[P(x) = x \notin x\]</p>
+        <p>That is, x is not an element of itself.  Unfortunately, substituting this predicate for P within the axiom of unrestricted comprehension, we can derive, via the axioms and rules of inference in Frege&#8217;s system, the following contradiction.</p>
+        <p>\[x \in x \iff x \notin x\]</p>
+        <p>That is, x is a member of itself if and only if x is <em>not</em> a member of itself.  Finding an inconsistency within a deductive system essentially renders the entire system worthless.  The entire foundations of logicism faced a crisis, as all axiomatic systems of arithmetic thus far either implicitly or explicitly relied on the axiom of unrestricted comprehension, including Peano arithmetic.  Frege subsequently abandoned his logicist ambitions, but others worked to salvage the situation. </p>
+        <p>The contradicition was resolved by Russell with his own axiomatic system of <em>ramified type theory, </em>that was expounded in the three-volume <em>Principia Mathematica</em> (1910, 1912, 1913), co-authored with A.N. Whitehead. Russell&#8217;s paradox highlights the problem of allowing self-reference within a system.  It allows one to reason about &#8216;the set of all sets&#8217;.  Suppose such a set existed.  Being a set, it should therefore be an element of itself, since it is the set of <em>all</em> sets.  Such a notion does not make sense.  Russell&#8217;s theory of types defers self-referential notions such as &#8216;set of all sets&#8217; by defining a hierarchical system of types.  Objects of a particular type at some level of the hierarchy may only be defined in terms of objects at lower hierarchies.  So, we can define objects at a level above those of sets, called <em>classes</em>, where we can define a <em>class of all sets</em>.  Note that this is now not self-referential, but doesn&#8217;t this surely just kick the can down the road?  Don&#8217;t we now have to resolve the problem of &#8216;classes of classes&#8217;?  Russell&#8217;s hierarchy of types is infinite, we simply keep defining levels one after the other as we wish, kicking the can down the road forever.</p>
+        <p>At around the same time, the German mathematician Ernst Zermelo was developing a reformulation of Cantor&#8217;s set theory that was free from Russell&#8217;s paradox.  In contrast to Russell, Zermelo disallowed self-referential notions entirely by introducing an axiom of restricted comprehension, now more commonly known as the <em>axiom schema of </em><i>separation</i>.  This theory essentially rejects all self-referential notions such as the set of all sets as beyond the scope of the theory.  With contributions from Abraham Fraenkel and others, this led to the development of the canonical <em>Zermelo-Fraenkel set theory with the axiom of choice</em> (<em>ZFC</em>).  Being simpler than Russell&#8217;s theory of types, it has become the most well-established system of set theory in use today. </p>
+        <p>ZFC succeeds in providing an axiomatic system of set theory, where the elements of the universe are pure sets only.  That is, the members of sets are sets themselves, with the simplest of these being the empty set.  From this theory, all other branches of mathematics can be constructed.  For example, the natural numbers can be defined purely in terms of sets.  The number zero is defined to be the empty set, with all other numbers being generated by a successor function S, defined in the following way:</p>
+        <p>\[S(a) = a \cup \{a\}\]</p>
+        <p>S(a) yields the next natural number immediately after a.  Starting from 0, defined as the empty set, we can construct the natural numbers.</p>
+        <div class="of_table">\[\begin{align*} 0 &amp;= \varnothing \\S(0) &amp;= \varnothing \cup \{\varnothing \} = \{\varnothing\} = 1 \\<br />S(1) &amp;= 1 \cup \{1\} = \{\varnothing\} \cup \{\{\varnothing\}\} = \{\varnothing, \{\varnothing\}\} = 2 \\<br />S(2) &amp;= 2 \cup \{2\} =\{\varnothing, \{\varnothing\}\} \cup \{\{\varnothing, \{\varnothing\}\}\} = \{\varnothing, \{\varnothing\}, \{\varnothing, \{\varnothing\}\}\} = 3\\ \text{&#8230;etc} \end{align*}\]</div>
+        <p>The works of Frege, Russell and many others was crucial in delivering insights into the foundations of mathematics.  The mathematician David Hilbert compiled a list of the desired features to be present within a deductive system, becoming a manifesto of logicism know as <em>Hilbert&#8217;s program</em>.  Such a system should be <em>consistent</em>, <em>complete</em> and <em>decidable</em>.  As we have mentioned previously, a consistent system should not be able to prove that both P and its negation are true, where P is any proposition.  A complete system requires that every true proposition within the system be provable within the system.  All true statements should be derivable from the axioms.  Finally, a decidable system possesses an algorithm that can determine the truth or falsity of any proposition P within the system.</p>
+        <p>Much of the early 20<sup>th</sup> century saw logicians beginning to investigate deductive systems mathematically.  That is, developing mathematical models of deductive systems in order to study their capabilities and limitations.  These included questions about their consistency, completeness and decidability.  Unfortunately for Hilbert, many of the goals of his program would be shown to be unattainable.  In 1931, mathematician Kurt Gödel would publish his incompleteness theorems, in which he proved that any logical system powerful enough to describe natural number arithmetic was incomplete.  That is, there exists true statements within the system that cannot be proven within the system.  It follows from this theorem that it is also impossible to prove the consistency of a system within that system itself.  In 1949, Alfred Tarski showed that any theory of natural number arithmetic was undecidable.</p>
+        <figure style="width: 206px" class="alignleft"><img loading="lazy" class="" src="https://upload.wikimedia.org/wikipedia/commons/4/42/Kurt_g%C3%B6del.jpg" alt="Kurt Gödel" width="206" height="262" /><figcaption>Kurt Gödel</figcaption></figure>
+        <p>This blow to the logicist program was not entirely fatal though.  From Gödel&#8217;s results, the field of <em>mathematical logic</em> or <em>metamathematics</em> was born, being an active field of research to this day.  This has spawned branches of investigation into the nature of deductive systems that include proof theory, model theory, set theory and recursion theory.  As disastrous as Gödel&#8217;s results may seem, formal deductive systems still form the foundation of mathematics today.  While a system cannot prove its own consistency, consistency proofs of a system can be constructed within a stronger system.  For example, the consistency of Peano arithmetic can be proven from ZFC.  While the incompleteness theorem shows it is impossible to derive every truth within the system, it is possible to formalise all forms of mathematics that are useful to anyone.  In particular, ZFC has proven to be an effective theory of sets on which almost all mathematics can be constructed.</p>
+        <p>Throughout its history, mathematics has evolved from a system of inductive reasoning that stems from observation of real world phenomena to a method of deductive reasoning that allowed the construction of mathematical models transcending any known application.  This trend of <em>pure mathematics</em> &#8211; exploring mathematical structures for their own sake, has been essential for the advancement of many fields such as science, economics and philosophy.  For example, the square root of negative one is an intuitively difficult to grasp concept, because it is outside of our experience of what a number is.  But the development of complex numbers, a system of algebra which allows the presence of such an object, has been an immensely useful tool within science and engineering.  By experimenting with Euclid&#8217;s system of geometry, in particular removing the axiom known as the <em>parallel postulate</em>, we can create new non-Euclidean geometries, such as elliptic and hyperbolic geometries that are useful in navigation and cosmology.  Before the 19<sup>th</sup> century, Euclidean geometry was assumed to be the only geometry.  Without hyperbolic geometry, we would not have Einstein&#8217;s theory of general relativity. </p>
+        <p>The development of exotic mathematical models seems to precede a discovery for its use in many cases, demonstrating that pure mathematics is not a frivolous pursuit.  Many of the deepest theories in physics are now based on mathematics that was once entirely abstract and seemingly removed from any sort of reality.  Examples of this are the theorems of quantum field theory, whose concepts are so unintuitive that it is effectively impossible to explain them in a way that can be related to our lived experience.  In other words, mathematics becomes the <em>only</em> method of rigorous communication on the frontiers of scientific discovery. </p>
+        <p>The attempt to unify quantum mechanics with general relativity has lead to the development of <em>string theory</em>.  This is the pinnacle of unintuitive mathematics, declaring that the universe is composed of more than 10 dimensions; a far cry from our three-dimensional experience (four if you include time).  Unlike the theories of quantum mechanics and general relativity, that are supported with observational evidence, string theory is an entirely pure mathematical hypothesis about the ultimate nature of reality.  No evidence exists yet which supports the hypothesis, but this is because no one has yet devised an experimental process to generate this evidence. Could string theory lead to a unified theory of everything?  Could the abstract world of mathematics, to some extent, <em>be</em> our reality.  Perhaps time will yield the answers.</p>
+    </div>
+</body>
+</html>

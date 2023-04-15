@@ -1,0 +1,239 @@
+body {
+  font-size: 1rem;
+  background-color: #303030;
+  color: white;
+  margin: 1em;
+  font-family: "Segoe UI", "Segoe UI Symbol", Arial, sans-serif;
+}
+
+.site_banner
+{
+    color: #008000;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Segoe UI", "Segoe UI Symbol", Arial, sans-serif;
+}
+
+.site_description
+{
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    /*background-color: #D0F0D0;
+    border-radius: 5px;*/
+    padding: 5px;
+   /* border: solid 1px #A0A0A0;*/
+}
+
+.folderview {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    color: black;
+    margin: 2em;
+}
+.folderview > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */        
+    padding: 5px;
+}
+
+.folderview a
+{
+    color: black;
+    text-decoration: none;
+    /*width: 100%;
+    height: 100%; */
+}
+
+.folderview > div:hover
+{
+    background-color: #c0c0f0;
+}
+
+.nav_buttons {
+    font-size: 300%;
+    line-height: 1;
+}
+
+.nav_buttons > a {
+    text-decoration: none;
+}
+
+.breadcrumb {
+    margin: 0;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+}
+
+#main_content {
+    position: relative;
+    padding: 2rem;
+    background-color: white;
+    color: #1a1a1a;
+    border-radius: 10px;
+}
+        
+/* Main article style rules */
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 0 0 1.75em;
+    /*table-layout: auto;*/
+    width: 100%;
+    box-sizing: inherit;
+    overflow-x: scroll;
+}
+
+th {
+    background-color: #E0E0FF;
+    text-align: center;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 0.44em;
+}
+table, th, td {
+    border: 1px solid #d1d1d1;
+}
+
+.of {
+    overflow-x: auto;
+}
+
+.of_table {
+    white-space: nowrap; 
+    overflow-x: auto; 
+    box-sizing: border-box;
+}
+.min {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.fitch, .fitch th, .fitch td {
+    width: 1%;
+    white-space: nowrap;
+    text-align: left;
+    border-width: 0;
+}
+
+.article
+{
+    /*word-wrap: break-word;*/
+    font-size: 1rem;
+    line-height: 1.75;
+    font-family: Merriweather, Georgia, serif;
+}
+
+.article .indent1 {
+    margin-left: 2em;
+}
+
+.article h1 {
+    text-align: center;
+}
+
+.article h1,  .article h2, .article h3, .article h4, .article h5, .article h6 {
+    font-family: Montserrat, "Helvetica Neue", sans-serif;
+    font-weight: 700;
+}
+
+.article > blockquote {
+    border-left: 0.25em solid;
+    margin: 0 0 1.75em;
+    padding-left: 1em;
+    border-left-color: rgb(104,104,104);
+    color: rgb(104,104,104);
+    font-style: italic;
+    font-size: 1.1875rem;
+    line-height: 1.47;
+}
+
+.article blockquote cite {
+    color: #1a1a1a;
+    display: block;
+    font-size: 1rem;
+    line-height: 1.75;
+    position: relative;
+    font-style: normal;
+}
+.article blockquote cite:before {
+    content: "\2014\00a0";
+}
+p.has-drop-cap:not(:focus)::first-letter {
+    font-size: 5em;
+    
+}
+
+.has-drop-cap:not(:focus):first-letter {
+    float: left;
+    font-size: 8.4em;
+    line-height: .68;
+    font-weight: 100;
+    margin: 0.05em 0.1em 0 0;
+    text-transform: uppercase;
+    font-style: normal;
+}
+
+.article figure {
+    margin-bottom: 1.75em;
+    max-width: 50%;
+}
+
+.article img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article figcaption {
+    color: #686868;
+    font-size: 0.82rem;
+    font-style: italic;
+    line-height: 1.62;
+    padding-top: 0.54em;   
+}
+
+.alignright {
+    float: right;
+    margin: 0.375em 0 1.75em 1.75em;
+}
+
+.alignleft {
+    float: left;
+    margin: 0.375em 1.75em 1.75em 0;
+}
+
+.defn {
+    font-style: italic;
+    font-weight: bold;
+}
+/* Fonts */
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5-fCZM.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+

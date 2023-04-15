@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-GB" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+	<title>Classical mechanics: Kinematics</title>
+    <base href="https://esotechnica.com">
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        MathJax = {
+          tex: {
+        	  macros: {
+        		   uveci: ["{\\hat \\imath}", 0],
+        		   uvecj: ["{\\hat \\jmath}", 0],
+        		   uvec: ["{\\hat #1}", 1],
+        		   bvec: ["{\\mathbf #1}", 1],
+                   avec: ["{\\vec #1}", 1]
+        	  }
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
+    <script src="https://cdn.tiny.cloud/1/sk3gopaqb107e73lsdneanihu1o23b3d2rqdf0uochozwj9f/tinymce/6/tinymce.min.js" referrerpolicy="origin">
+    </script>
+</head>
+<body>
+	<h1 class="site_banner" title="Esotechnica"><span onclick="location.href = '#';" style="cursor: pointer">&#8714;&int;&empty;&#8868;&#8714;&sub;&#8463;&#8469;|&sub;&and;&gt;&nbsp;&#9632;</span></h1>
+	<p class="site_description">my  $misc::nerdy-&gt;stuff</p>
+
+	<div id="main_content" class="article">
+	    <div class="nav-container">
+	        <p class="breadcrumb"><a href="#">Home</a> &gt; <a href="docs/phys/cm_intro.html">Classical Mechanics</a> &gt; Kinematics</p>
+	        <div class="nav_buttons"><a href="docs/math/math_found_prop_logic.html">&larr;</a> <a href="docs/math/math_found_intro.html">&uarr;</a> &rarr;</div>
+	    </div>
+        <h1>
+            Kinematics
+        </h1>
+        <p>
+            <strong>Kinematics </strong>is the creation of a mathematical model of an object's motion. &nbsp;An object is moving when its position changes over time. Therefore, motion can be modelled as a function of position with respect to time. &nbsp;So, the first step in modelling an object's motion is to model an object's position. &nbsp;This can be achieved by selecting a coordinate system with sufficient dimensions \(n\). &nbsp;Typically, in classical mechanics, \(n = 3\) for most real-world scenarios, as we live in a (perceived) three-dimensional world. But we may also use \(n = 2\) when we only care about motion restricted to a plane. Any point within such a system can be described using a sequence of \(n\) values. These values form the <i>components </i>or <i>coordinates </i>of the point. The point's position may then be modelled as an \(n\)-dimensional vector, known as the <strong>position vector</strong>, whose values are the coordinates of the point.&nbsp;
+        </p>
+        <figure class="alignright">
+            <p>
+                <img src="https://esotechnica.com/img/coord_cylindrical.png">
+            </p>
+            <figcaption>
+                Fig. 1.1 &nbsp;An example coordinate system for an ATC facility
+            </figcaption>
+        </figure>
+        <p>
+            Selection of a coordinate system requires four considerations:
+        </p>
+        <ul style="list-style-type:disc;">
+            <li style="list-style-type:disc;">
+                Selecting the type of coordinate system (Cartesian, polar, etc.)
+            </li>
+            <li style="list-style-type:disc;">
+                Selecting a reference point (the <i>origin</i>) from which all other positions are relative.
+            </li>
+            <li style="list-style-type:disc;">
+                Defining the orientation of the axes of the coordinate system.
+            </li>
+            <li style="list-style-type:disc;">
+                Selecting units of measurement for each component of the coordinates.
+            </li>
+        </ul>
+        <p>
+            Consider the example of an air traffic control system which must keep track of the position of aircraft within its airspace. &nbsp;Figure 1.1 demonstrates one way of choosing a coordinate system for this situation.
+        </p>
+        <p>
+            In this scenario, a 3-dimensional <a href="https://en.wikipedia.org/wiki/Cylindrical_coordinate_system">cylindrical coordinate system</a> has been chosen. &nbsp;Such a system requires specifying an origin at which two axes — the <i>polar </i>and <i>longitudinal </i>axes — intersect. &nbsp;Let the control tower be the origin \(O\), and let the polar axis \(P\) be the line that is drawn from the control tower due north. &nbsp;The longitudinal axis \(L\) will be the line perpendicular to the Earth's surface, emerging from \(O\). &nbsp;Any aircraft position may now be represented with a position vector \(\vec{x} = \langle r, a, \theta \rangle \). The length \(r\) represents the radial distance from the control tower to the point on the ground directly underneath the aircraft, designated by the point \(D\). &nbsp;The length \(a\) represents the altitude or height of the aircraft above the ground. Finally, the angle \(\theta\) is the clockwise-positive angle subtended between the line \(OD\) and the axis \(A\). We will assert the lengths \(a\) and \(r\) be measured in meters, and \(\theta\) to be measured in degrees. &nbsp;If the aircraft in the diagram is 6km northwest of the control tower at a height of 5000 meters, the position vector \(\vec{x}\), represented by the black arrow, will have the value \(\langle 6000\text{m}, 5000\text{m}, 45° \rangle \).
+        </p>
+        <p>
+            &nbsp;
+        </p>
+        <figure class="alignleft">
+            <p>
+                <img src="https://esotechnica.com/img/coord_cartesian.png">
+            </p>
+            <figcaption>
+                Fig. 1.2 &nbsp;Equivalent Cartesian coordinates
+            </figcaption>
+        </figure>
+        <p>
+            Within most texts on classical mechanics, and this one being no exception, a <i>Cartesian coordinate system</i> is more common for modelling kinematics scenarios. &nbsp;A Cartesian coordinate system (Figure 1.2) defines three orthogonal axes \(i\), \(j\) and \(k\), which all intersect at the origin. &nbsp;A point \(P\) in this space can be represented by the position vector \(\vec{P} = \langle x_i, x_j, x_k \rangle\), where \(x_i\), \(x_j\) and \(x_k\) represent the projections of the point \(P\) on the \(i\), \(j\) and \(k\) axes, respectively.
+        </p>
+        <p>
+            With the choice of a coordinate system, we are now ready to model motion mathematically. &nbsp;We define the vector function \(\vec{x}(t)\) of some object to be the function that yields the position vector for the object at some time \(t\). &nbsp;As an example, consider the Cartesian position function \(\vec{x}(t) = a \cos(t)\uveci + a \sin(t)\uvecj + t\uvec{k}, t \ge 0\). &nbsp;The terms \(\uveci, \uvecj, \text{and } \uvec{k}\) represent the unit vectors for the \(i, j \text{ and } k\) axes respectively. This function models an object whose position is \(\langle 1, 0, 0\rangle\) at \(t = 0\). &nbsp;As \(t\) increases, the object travels a spiral path upwards and anti-clockwise around the \(k\) axis, with the radius of the spiral being \(a\) units. &nbsp;The spiral performs one complete revolution every \(2 \pi \) units of time, and grows in height by one unit for each unit of time. &nbsp;
+        </p>
+        <p>
+            &nbsp;
+        </p>
+        <h2 style="clear:left;">
+            Velocity
+        </h2>
+        <p>
+            <strong>Velocity </strong>is defined as the <i>rate of change</i> of an object's position. &nbsp;Velocity is a vector quantity whose magnitude is sometimes known as <i>speed</i>. &nbsp;Recall from mathematics that the <em>average rate of change</em> of some function \(f(x)\) between two values \(x_1\) and \(x_2\) is defined as \(\frac{f(x_2) - f(x_1)}{x_2 - x_1}\). &nbsp;We therefore define the <strong>average velocity</strong> of an object as:
+        </p>
+        <p>
+            \[{\vec{v}}_{avg} = \frac{\Delta \vec{x}}{\Delta t} = \frac{\vec{x_2} - \vec{x_1}}{t_2 - t_1}\]
+        </p>
+        <p>
+            where \(\vec{x_1}\) and \(\vec{x_2}\) are the position vectors of the object at times \(t_1\) and \(t_2\) respectively. &nbsp;For example, if an object has the position vectors \(\vec{x_1} = -3\uveci + \uvecj + 6\uvec{k}\) at time \(t_1 = 5\), and \(\vec{x_2} = 2\uveci - \uvecj - \uvec{k}\) at time \(t_2 = 10\), then we can calculate the average velocity between these times. &nbsp;That is, \({\vec{v}}_{avg} = \frac{\vec{x_2} - \vec{x_1}}{t_2 - t_1}\) \(= \frac{(2\uveci - \uvecj - \uvec{k}) - (-3\uveci + \uvecj + 6\uvec{k})}{10 - 5}\) \(= \frac{5\uveci - 2\uvecj -7\uvec{k}}{5}\) \(= \uveci - \frac{2}{5}\uvecj - \frac{7}{5}\uvec{k}\).
+        </p>
+        <p>
+            If an object's position function \(\vec{x}(t)\) can be represented as a differentiable algebraic expression, we can derive an <strong>instantaneous velocity</strong> function \(\vec{v}(t)\) which allows us to calculate the instantaneous velocity of the object at any time \(t\). &nbsp;From calculus, we know that the <i>derivative function</i> of some function \(f(x)\), denoted as\(\frac{\text{d}f}{\text{d}x}\), is a function that yields the instantaneous rate of change of \(f(x)\) for any \(x\). &nbsp;So, the instantaneous velocity function is given by:
+        </p>
+        <p>
+            \[\vec{v}(t) = \frac{\text{d}\vec{x}}{\text{d}t}\]
+        </p>
+        <p>
+            When \(\vec{v}(t) = \vec{0}\), the object is not moving (it is <i>at rest</i>). &nbsp;As an example, let the position function for some object be \(\vec{x}(t) = 4t^2\uveci - t^3\uvecj - \uvec{k}\). &nbsp;Then, the velocity function \(\vec{v}(t) = \frac{\text{d}\vec{x}}{\text{d}t} = 8t\uveci - 3t^2\uvecj \).
+        </p>
+        <h2>
+            Acceleration
+        </h2>
+        <p>
+            <strong>Acceleration </strong>is defined as the<i> rate of change</i> of an object's velocity. &nbsp;Just like velocity, acceleration is a vector quantity. &nbsp;Using the same reasoning outlined in the preceding section, it should be easy to conclude that the <strong>average acceleration</strong> \({\vec{a}}_{avg}\) of an object is defined as:
+        </p>
+        <p>
+            \[{\vec{a}}_{avg} = \frac{\Delta \vec{v}}{\Delta t} = \frac{\vec{v_2} - \vec{v_1}}{t_2 - t_1}\]
+        </p>
+        <p>
+            where \(\vec{v_1}\) and \(\vec{v_2}\) are the velocity vectors of the object at times \(t_1\) and \(t_2\) respectively. &nbsp;For example, if an object has the velocity vectors \(\vec{v_1} = 2\uveci - \uvecj - 6\uvec{k}\) at time \(t_1 = 4\), and \(\vec{v_2} = 10\uveci + \uvecj\) at time \(t_2 = 12\), then we can calculate the average acceleration between these times. &nbsp;That is, \({\vec{a}}_{avg} = \frac{\vec{v_2} - \vec{v_1}}{t_2 - t_1}\) \(= \frac{(10\uveci + \uvecj) - (2\uveci - \uvecj - 6\uvec{k})}{12 - 4}\) \(= \frac{8\uveci + 2\uvecj + 6\uvec{k}}{8}\) \(= \uveci + \frac{1}{4}\uvecj + \frac{3}{4}\uvec{k}\).
+        </p>
+        <p>
+            An object's acceleration function \(\vec{a}(t)\) is simply the derivative of the velocity function \(\vec{v}(t)\):
+        </p>
+        <p>
+            \[\vec{a}(t) = \frac{\text{d}\vec{v}}{\text{d}t} = \frac{\text{d}^2\vec{x}}{\text{d}t^2}\]
+        </p>
+        <p>
+            When \(\vec{a}(t) = \vec{0}\), the object is moving at a constant velocity. &nbsp;The acceleration function of the object in the above example would be \(\vec{a}(t) = 8\uveci - 6t\uvecj\).
+        </p>
+        
+        <h2>
+            Deriving the equations of motion
+        </h2>
+        <p>
+            We have shown how to find the functions for velocity and acceleration of an object, given the position function of the object, by differentiation. We can also do the reverse, and derive the functions for velocity and displacement from the acceleration function via integration. However, we require some initial conditions to be known; specifically, the initial velocity and initial displacement (velocity and displacement at \(t = 0\)). &nbsp;Given the acceleration function \(\vec{a}(t)\) of an object, and its velocity at \(t = 0\) (\(v_0\)), the velocity function of the object is:
+        </p>
+        <p>
+            \[\vec{v}(t) = \int \vec{a}(t) \text{ d}t\]
+        </p>
+        <p>
+            where the constant of integration will be replaced with \(v_0\). &nbsp;We can then integrate the velocity function, and knowing the displacement of the object at \(t = 0\) (\(x_0\)), the displacement function will be:
+        </p>
+        <p>
+            \[\vec{x}(t) = \int \vec{v}(t) \text{ d}t\]
+        </p>
+        <p>
+            where the constant of integration will be replaced with \(x_0\).
+        </p>
+        <h2>
+            Equations of motion: constant acceleration
+        </h2>
+        <p>
+            An important scenario in classical mechanics is that of an object experiencing a constant acceleration. &nbsp;That is, \(a(t) = \vec{A}\), where \(\vec{A}\) is a vector constant. &nbsp;The canonical example is an object in free fall close to the Earth's surface. &nbsp;Projectile motion is another example which has practical aeronautical and military applications. &nbsp;If we know the initial velocity \(\vec{v}_0\) of such an object, then according to Kin 1.1, we get:
+        </p>
+        <p>
+            \[\vec{v}(t) = \vec{v}_0 + \vec{A}t \]
+        </p>
+        <p>
+            Integrating once again to get the displacement function, we get:
+        </p>
+        <p>
+            \[\vec{x}(t) = \vec{x}_0 + \vec{v}_0t + \frac{1}{2}\vec{A}t^2 \]
+        </p>
+    </div>
+</body>
+</html>

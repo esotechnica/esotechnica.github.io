@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en-GB" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <base href="https://esotechnica.com">
+	<title>Foundations of Mathematics: Propositional logic</title>
+	<link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        MathJax = {
+          tex: {
+        	  macros: {
+        		   uvec: ["{\\mathbf #1}", 1],
+        		   bvec: ["{\\mathbf #1}", 1],
+                   avec: ["{\\vec #1}", 1]
+        	  }
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
+</head>
+<body>
+	<h1 class="site_banner" title="Esotechnica" onclick="location.href = '#';" style="cursor: pointer">&#8714;&int;&empty;&#8868;&#8714;&sub;&#8463;&#8469;|&sub;&and;&gt;&nbsp;&#9632;</h1>
+	<p class="site_description">my  $misc::nerdy-&gt;stuff</p>
+
+	<div id="main_content" class="article">
+	    <div class="nav-container">
+	        <p class="breadcrumb"><a href="#">Home</a> &gt; <a href="docs/math/math_found_intro.html">Foundations of Mathematics</a> &gt; Propositional Logic</p>
+	        <div class="nav_buttons"><a href="docs/math/math_found_intro.html">&larr;</a> <a href="docs/math/math_found_intro.html">&uarr;</a> <a href="docs/math/math_found_pred_logic.html">&rarr;</a></div>
+	    </div>
+        <h1>Chapter 1: Propositional logic</h1>
+        
+        <p>Most of us have an intuitive understanding, at least, of what logic is.  For example, if it is raining outside, you know that the grass will be wet.  It&apos;s logical!  You don&apos;t need to walk outside and look at the grass to know this.  You have made a <span class='defn'>logical inference</span>. That is, you have come to a conclusion (the grass is wet), based on some known fact (It is raining).  The study of logic, in its formal sense, is a study of the ways in which we can make valid inferences.  The ancient Greeks were the first to study logic as a method of determining the validity of arguments.  They achieved this by decomposing an argument into its <span class='defn'>premises</span> (what we know) and <span class='defn'>conclusion</span> (what we infer).  In doing so, patterns of reasoning were identified as being universally valid, and these were codified as <span class='defn'>rules of inference</span>.  An example of one of the simplest rules of inference, known as <em>modus ponens</em>, is shown below:</p>
+        
+        $$
+        \small{
+        \begin{array}{l}
+        \text{If A, then B}\\
+        \text{A}\\
+        \hline
+        \text{B}
+        \end{array}
+        }
+        $$
+        
+        
+        <p>The notation above is a common way of writing rules of inference in studies of logic.  The lines above the bar form the premises, and the line below the bar is the conclusion.  A rule of inference declares that <em>if</em> we accept that all of the premises are true, then the conclusion <em>must</em> be true.  The letters A and B act as placeholders or variables that can be substituted with any <span class='defn'>proposition</span>.  A proposition is any statement that can be considered either true or false.  For example, 'A dog is a mammal' is a proposition that is always true, but the proposition 'The Earth is flat' is always false.  Statements such as 'It is raining', 'Thomas is six feet tall' or 'Dogs are better than cats' are also propositions, although the truth of these statements depends on context or situation.  The rule of modus ponens defines a 'logical template' of sorts; it is an inference that is universally valid regardless of what the propositions A and B are.  For example, if we substitute the proposition 'It is raining' for A, and the proposition 'the grass is wet' for B, we get the following valid argument.</p>
+        
+        $$
+        \small{
+        \begin{array}{l}
+        \text{If it is raining, then the grass is wet}\\
+        \text{It is raining}\\
+        \hline
+        \text{The grass is wet}
+        \end{array}
+        }
+        $$
+        
+        
+        <p>That is, if we accept that the statements 'If it is raining, then the grass is wet' and 'It is raining' are true, we must conclude that 'the grass is wet'.  But what about the following instantiation of modus ponens, in which the propositions A = 'The Sun is a star' and B = 'The moon is made of cheese'.</p>
+        
+        <div class="of_table">
+        $$
+        \small{
+        \begin{array}{l}
+        \text{If the Sun is a star, then the moon is made of cheese}\\
+        \text{The Sun is a star}\\
+        \hline
+        \text{The moon is made of cheese}
+        \end{array}
+        }
+        $$
+        </div>
+        
+        <p>This example highlights the difference between validity and truth.  This argument is indeed logically valid, as the conclusion necessarily follows from the premises.  But remember, you must accept that the premises are true.  In this universe, at least, the first premise is clearly false.  The distinction between validity and truth is an important one in mathematical logic.</p>
+        
+        <p><em>Modus ponens</em> is just one example of a rule of inference. There are, of course, many more, which will be revealed in time.  The construction of a valid argument depends on the ability to show that, given a set of premises, some conclusion follows by applying one or more rules of inference in succession, forming a 'chain' of inference.  The conclusions of earlier rules of inference in the chain becomes the premises of the later rules.  This is known as a <span class='defn'>proof</span> or <span class='defn'>derivation</span> of the argument.  This is essentially what mathematics is about: proving some fact about a system (conclusion) from simpler facts (the premises).</p>
+          
+        <p>In the remainder of this chapter, the reader is introduced to <em>symbolic logic</em>, an algebra-like language which succinctly and precisely allows us to formulate logical arguments.  Symbolic logic is required to remove the ambiguity presented by natural languages such as English, and makes the notation more compact.  Using this language, complex propositions can be created from simpler ones.  Following this, the rules of inference are introduced, and a number of examples of derivations of logical arguments are presented. 
+        </p>
+        
+        <h2>Symbolic construction of propositions</h2>
+        
+        <p>Consider the importance and usefulness of algebra.  Algebra provides a method to describe and discover relationships between numeric quantities.  For example, the relationship between the radius and the area of the circle can be described by the formula \(A = \pi r^2\), where \(A\) represents the area, and \(r\) represents the radius.  Algebraic variables represent numeric values, which can be combined using algebraic operations (such as addition, multiplication, etc.) into algebraic expressions that yield new numeric values when they are evaluated.</p>
+        
+        <p>In a similar way, it is possible to create an algebra for the manipulation of propositions.  Propositions are represented by propositional variables in the same way that numeric values can be represented by algebraic variables; the only difference is that propositional variables represent truth values (<em>true</em> or <em>false</em>).  The values 'true' and 'false' (which we will represent by the symbols \(\top\) and \(\bot\), respectively) are the only two constants in propositional logic.  Compare this to algebra, which has an infinite number of numeric constants, such as 3, 2.6, \(\pi\), etc.  The table below summarizes the difference between propositional and algebraic variables with an example of each.</p>
+        
+        <div class="of_table"><table>
+          <tbody>
+            <tr>
+              <th>Variable type</th>
+              <th>Name of identifier</th>
+              <th>Meaning</th>
+              <th>Possible values</th>
+            </tr>
+            <tr>
+              <td>Algebraic variable</td>
+              <td>r</td>
+              <td>Radius of a circle</td>
+              <td>Any real number </td>
+            </tr>
+            <tr>
+              <td>Propositional variable</td>
+              <td>P</td>
+              <td>The proposition 'Sasha is cold'</td>
+              <td>The values \(\top\) or \(\bot\)</td>
+            </tr>
+          </tbody>
+        </table></div>
+        
+        <p>Consider the following propositions:</p>
+        <ul>
+           <li>If the weather is wet or John is bored, then John will go to the movies today.</li>
+           <li>Roses are red if and only if violets are blue.</li>
+           <li>If Jason&apos;s heart rate is greater than 120 beats per minute and his respiration is greater than 20 breaths per minute, then either Jason is unwell, or he has recently exercised.</li>
+        </ul>
+        
+        <p>The above propositions are composed of simpler propositions.  For example, the first proposition can be decomposed into three simpler propositions: 'The weather is wet', 'John is bored' and 'John will go to the movies'.  Let us assign these propositions to variables as follows:
+        </p>
+        
+        <p class="indent1">
+        A = 'The weather is wet'<br>
+        B = 'John is bored'<br>
+        C = 'John will go to the movies today'
+        </p>
+        
+        <p>The first proposition can then be shown to be a composition of the propositions A, B and C as follows:
+        </p>
+        
+        <p class="indent1">If A or B, then C
+        </p>
+        
+        <p>
+        Propositions that cannot be decomposed into simpler propositions are known as <span class='defn'>atomic propositions</span>.  A, B and C are examples of atomic propositions.  All other propositions that are not atomic are known as <span class='defn'>compound propositions</span>.  Compound propositions are composed of atomic propositions 'glued' together with <span class='defn'>logical operators</span> or <span class='defn'>logical connectives</span>.  In English, words and phrases such as 'and', 'or', 'not', 'if...then...' and 'if and only if' act as logical operators.  Unfortunately, English words and sentences are often ambiguous and too verbose to allow an efficient examination and manipulation of logical arguments.  For this reason, propositional logic precisely defines the meaning of logical operators, assigning each operation with a symbol.  The following table highlights the most important logical operators. 
+        </p>
+        
+        <div class="of_table"><table>
+          <tbody>
+            <tr>
+              <th>Operation</th>
+              <th>Symbol</th>
+              <th>Type</th>
+              <th>Example</th>
+        	  <th>Meaning</th>
+            </tr>
+            <tr>
+              <td>Negation (logical NOT)</td>
+              <td>\(\neg\)</td>
+              <td>Unary</td>
+              <td>\(\neg A\) (The weather is not wet)</td>
+        	  <td>Yields the truth value opposite to that of its operand.</td>
+            </tr>
+           <tr>
+              <td>Disjunction (logical OR)</td>
+              <td>\(\lor\)</td>
+              <td>Binary</td>
+              <td>\(A \lor B\) (The weather is wet or John is bored)</td>
+        	  <td>Yields the value \(\bot\) only when the value of both operands is \(\bot\), \(\top\) otherwise.</td>
+            </tr>
+           <tr>
+              <td>Conjunction (logical AND)</td>
+              <td>\(\land\)</td>
+              <td>Binary</td>
+              <td>\(A \land B\) (The weather is wet and John is bored)</td>
+        	  <td>Yields the value \(\top\) only when the value of both operands is \(\top\), \(\bot\) otherwise.</td>
+            </tr>
+            <tr>
+              <td>Material implication</td>
+              <td>\(\to\)</td>
+              <td>Binary</td>
+              <td>\(A \to B\) (If the weather is wet, then John is bored)</td>
+        	  <td>Yields the value \(\bot\) only if the first operand is \(\top\) and the second operand is \(\bot\), \(\top\) otherwise.</td>
+            </tr>
+            <tr>
+              <td>Material equivalence</td>
+              <td>\(\leftrightarrow\)</td>
+              <td>Binary</td>
+              <td>\(B \leftrightarrow A\) (John is bored if and only if the weather is wet)</td>
+        	  <td>Yields the value \(\top\) only if the values of both operands are the same, \(\bot\) otherwise.</td>
+            </tr>
+           </tbody>
+        </table></div>
+        
+        <p>Logical operators are similar to algebraic operators in that they take one or more operands, and yield a value dependent on the value of its operands.  In algebra, the operands (constants or variables) have numeric values, and the operations (such as addition, multiplication, etc.) yield a numeric result.  In propositional logic, logical operators take one or more operands (propositional variables or the logical constants \(\top\) or \(\bot\)) and based on the operand&apos;s values, yields a result of either \(\top\) or \(\bot\).  In the next section, the nature and meaning of these five logical operators are discussed.
+        </p>
+        
+        <h2>Logical operations</h2>
+        
+        <p>For the purposes of illustration in the following discussion, let&apos;s define the following atomic propositions:</p>
+        <p class="indent1">
+        A = 'Jason&apos;s heart rate is greater than 120 beats per minute'<br>
+        B = "Jason's respiratory rate is less than or equal to 20 breaths per minute'<br>
+        C = "Jason is unwell'<br>
+        D = "Jason has recently exercised'
+        </p>
+        
+        <h3>Negation</h3>
+        
+        <p>Let&apos;s begin with the simplest of the logical operators, known as <span class='defn'>negation</span> or <span class='defn'>logical NOT</span>.  If \(\phi\) represents some proposition, then we write \(\neg \phi\) to represent the negation of \(\phi\).  If \(\phi\) is true, then \(\neg \phi\) is false.  Likewise, if \(\phi\) is false, then \(\neg \phi\) is true.  That is, the negation operator takes the truth value of a proposition, and returns the opposite truth value.  The negation operator is the only unary operator (operator that takes a single operand), with all the rest of the operators that we will define being binary operators.  Logical negation is often called logical NOT because it is like adding the word 'not' to the proposition.  In the table below, we see the negation of the propositions we defined above, and what they mean in English:
+        
+        <div class="of_table"><table>
+          <tbody>
+            <tr>
+        		<th>Proposition</th>
+        		<th>Meaning in English</th>
+        	</tr>
+            <tr>
+        		<td>\(\neg A\)</td>
+        		<td>Jason&apos;s heart rate is less than or equal to 120 beats per minute</td>
+        	</tr>
+            <tr>
+        		<td>\(\neg B\)</td>
+        		<td>Jason&apos;s respiratory rate is greater than 20 breaths per minute</td>
+        	</tr>
+            <tr>
+        		<td>\(\neg C\)</td>
+        		<td>Jason is not unwell (alternatively: Jason is well)</td>
+        	</tr>
+            <tr>
+        		<td>\(\neg D\)</td>
+        		<td>Jason has not recently exercised</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <p>A more formal definition of logical operators can be presented with the use of truth tables.  These tables list the result yielded by a logical operator for all possible values that the operand(s) take.  For logical negation, which has only a single operand, there are only two possibilities.  That is, the operand is either true or false.  The truth table for logical negation is shown below.  The first row represents the case when \(\phi\) is true, which defines the result of \(\neg \phi\) as false.  The second row represents the case when \(\phi\) is false, in which case \(\neg \phi\) will be true.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\neg \phi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+          </tbody>
+        </table></div>
+        
+        <h3>Disjunction</h3>
+        
+        <p>The remainder of our operators are binary operators.  That is, they take two operands and yield a single result.  The first of these we will examine is known as <span class='defn'>disjunction</span> or <span class='defn'>logical OR</span>.  If we have two propositions \(\phi\) and \(\psi\), the logical disjunction of \(\phi\) and \(\psi\), written as \(\phi \vee \psi\), is a proposition that is true if \(\phi\) is true or \(\psi\) is true or <em>both</em> \(\phi\) and \(\psi\) are true.  For example, consider the proposition \(C \vee D\).  This proposition is true if either of the propositions C or D, or both, are true.  That is, if Jason is unwell, or he has recently exercised, or if he is both unwell and has recently exercised, then the entire compound proposition \(C \vee D\) is true.  The truth table for logical disjunction below has four rows; one for each possible combination of values that the operands may take.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \vee \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <h3>Conjunction</h3>
+        
+        <p>The <span class='defn'>conjunction</span> or <span class='defn'>logical AND</span> operator, also a binary operator, takes two propositions and yields a result that is true only if both propositions are true.  It is often called logical AND because it is similar to the meaning of the word "and" in English.  For example, the proposition "Bill is bald and fat" is the conjunction of two atomic propositions "Bill is bald" and "Bill is fat".  Clearly, this proposition would only be considered to be true if Bill is both bald and fat.  For any two propositions \(\phi\) and \(\psi\), the logical conjunction is written as \(\phi\ \wedge \psi\).  The truth table below should be self-explanatory.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \wedge \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <h3>Material implication</h3>
+        
+        <p>The <span class='defn'>material implication</span> operator roughly models the English construct 'If...then...'.  For any two propositions \(\phi\) and \(\psi\), the proposition \(\phi \to \psi\) asserts that \(\psi\) must be true whenever \(\phi\) is true.  The proposition \(\phi\) is known as the <span class='defn'>antecedent</span>, and the proposition \(\psi\) is known as the <span class='defn'>consequent</span>.  The material implication operator can be a tricky concept to understand for beginners, so we reveal its truth table, followed by a careful discussion of why the truth table is the way it is.
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \to \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <p>To make the explanation more concrete, let's imagine that \(\phi\) is the proposition 'It is raining', and \(\psi\) is the proposition 'The grass is wet'.  The proposition \(\phi \to \psi\) then becomes 'If it is raining, then the grass is wet'.  The first row of the truth table represents the situation where it is raining, and the grass is wet.  Clearly then, the proposition 'If it is raining, then the grass is wet' holds true, and hence \(\phi \to \psi\) is true.  However, if it is raining and the grass is not wet, then the proposition 'If it is raining, then the grass is wet' is clearly false.  The second row of the truth table represents this situation, and we see that \(\phi \to \psi\) is false.  These cases are reasonably straightforward.</p>
+        
+        <p>The final two rows of the truth table examine the cases where it is not raining.  That is, \(\phi\) is false.  The proposition 'If it is raining, then the grass is wet' does not make any claims about a situation in which it does not rain.  You may say that the truth of the proposition \(\phi \to \psi\) is unknown in these two situations when \(\phi\) is false. In propositional logic, however, every proposition must have a value of true or false; undefined values are forbidden.  So, we define the proposition \(\phi \to \psi\) to be true whenever \(\phi\) is false. We say that the proposition is <em>vacuously true</em>; it is considered true because we have no evidence that it is not true, in the same way that a defendant in court is innocent until proven guilty.  So, when the antecedent is false, the truth of the consequent is irrelevant.  If it is not raining, we don't care if the grass is wet or not.  If the grass is wet, this does not make the proposition false, because there are other ways that the grass can get wet, such as by being watered by a gardener.  In other words, rain is a <em>sufficient</em> condition for the grass to be wet, but not a <em>necessary</em> condition.</p>
+        
+        <h3>Material equivalence</h3>
+        
+        <p>Our final logical operation is <span class='defn'>material equivalence</span>.  For any propositions \(\phi\) and \(\psi\), the proposition \(\phi \leftrightarrow \psi\) is only true if \(\phi\) and \(\psi\) have the same truth value.  That is, if \(\phi\) and \(\psi\) are both true, or \(\phi\) and \(\psi\) are both false.  In English, this often expressed as '\(\phi\) if and only if \(\psi\)'.  It differs from 'If \(\phi\), then \(\psi\)' in that \(\phi\) is a <em>necessary</em> condition for \(\psi\), and vice versa.  The truth table below should be self-explanatory.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \leftrightarrow \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <h3>Precedence rules for the logical operators</h3>
+        
+        <p>In algebra and arithmetic, there is a convention which determines in what order you must evaluate the operations.  This is known as <span class='defn'>operator precedence</span>.  For example, multiplication and division should be done before addition and subtraction, and so forth.  These precedence rules are not laws of mathematics, they are just agreed-upon conventions to eliminate ambiguity in expressions such as \(2 + 3 \times 4\).  It allows us to state with certainty that the result of the expression is 14, rather than 20.  Precedence rules are not entirely necessary, as we could make liberal use of brackets to unambiguously convey our meaning.  It's just a nicety that makes some expressions neater to write and hence easier to read. </p>
+        
+        <p>Unlike algebra and arithmetic, propositional logic has ill-defined precedence rules.  The only real convention in logic is that brackets should have the highest precedence (as in arithmetic), with logical negation having the next highest precedence.  For all other operators, there is no universal convention.  So, when using these operators, always use brackets to avoid ambiguity!</p>
+        
+        <h2>Constructing a complex proposition</h2>
+        
+        <p>Consider again the propositions that we defined above.</p>
+        
+        <p>
+        <p class="indent1">
+        A = 'Jason&apos;s heart rate is greater than 120 beats per minute'<br>
+        B = "Jason's respiratory rate is less than or equal to 20 breaths per minute'<br>
+        C = "Jason is unwell'<br>
+        D = "Jason has recently exercised'
+        </p>
+        
+        <p>Suppose we wanted to construct a proposition as follows:</p>
+        
+        <p class="indent1">E = 'If Jason's heart rate is greater than 120 beats per minute and his breathing is greater than 20 breaths per minute, then Jason is unwell or has recently exercised'.</p>
+        
+        <p>E is clearly a compound proposition, as we can identify atomic propositions within it:</p>
+        
+        <p class="indent1">If <mark>Jason's heart rate is greater than 120 beats per minute</mark> and <mark>Jason's breathing is greater than 20 breaths per minute</mark>, then <mark>Jason is unwell</mark> or <mark>Jason has recently exercised</mark>.</p>
+        
+        <p>The first, third and fourth propositions highlighted are the same as A, C and D.  The second proposition higlighted means the same thing as the negation of B.  That is, it is equivalent to \(\neg\) B.  Therefore, the proposition E is equivalent to 'If A and  \(\neg\)B, then C or D'.  In symbolic logic:</p>
+        
+        <p class="indent1">\(E = (A \wedge \neg B) \to (C \vee D) \)</p>
+        
+        <p>The truth of E is dependent upon the truth values of the atomic propositions A, B, C and D.  We can see exactly when E is true and when E is false by constructing a truth table lising every combination of truth values for these atomic propositions.  A compound proposition composed of \(n\) unique atomic propositions will require a truth table with \(2^n\) rows.  As E has four unique atomic propositions, we need \(2^4 = 16\) rows.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(A\)</th>
+        		<th>\(B\)</th>
+        		<th>\(C\)</th>
+        		<th>\(D\)</th>
+        		<th>\(\neg B\)</th>
+        		<th>\(A \wedge \neg B\)</th>
+        		<th>\(C \vee D\)</th>
+        		<th>\((A \wedge \neg B) \to (C \vee D)\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+           </tbody>
+        </table></div>
+        
+        <p>The truth table begins with the first four columns containing all of the possible combinations of truth values for the atomic propositions.  The last column shows the truth of E in every situation.  The columns in between are intermediate columns that help us to construct the final result by building the compound proposition in steps.  As precedence dictates, we evaluate what is contained within the brackets first.  Within the first set of brackets is the expression \(A \wedge \neg B\).  First, we need to construct the column \(\neg B\), as negation has the next highest precedence.  This then allows us to construct the column \(A \wedge \neg B\).  The next column is the expression in the second set of brackets: \(C \vee D\).  Finally, we can put it all together in the last column, by applying the material implication operation to the columns \(A \wedge \neg B\) and \(C \vee D\).</p>
+        
+        <p>Note that there is only one case where proposition E would be false, and that is the case in row 8.  We can check the truth values for A, B, C and D to see why this is so. We see that A is true, B is false, C is false and D is false.  In other words: </p>
+        
+        <ul>
+          <li>Jason's heart rate is greater than 120 beats per minute (A is true)</li>
+          <li>Jason's respiratory rate is NOT less than or equal to 20 breaths per minute. (B is false).  This is equivalent to 'Jason's respiratory rate is greater than 20 breaths per minute'</li>
+          <li>Jason is NOT unwell (C is false)</li>
+          <li>Jason has NOT recently exercised (D is false)</li>
+        </ul>
+        
+        <p>
+        This seems to make sense, as E asserts that a fast heart rate and breathing rate means that Jason must be unwell or has recently exercised, but in this case the proposition is violated.  When the truth of a proposition is dependent on the truth of its component propositions, we say that the proposition is a <span class='defn'>contingency</span>. While the proposition E may be considered a 'fact' (universally true) in the real world, in logic, the only universal truths are those propositions that are true <em>independent</em> of the truth of their component propositions.  We will discuss these and other types of propositions now, and how to identify them</p>
+        
+        <h2>Logical consequences and equivalences</h2>
+        
+        <p>Any proposition which is always true, regardless of the truth of its component propositions, is known as a <span class='defn'>tautology</span>.  For example, the proposition \(\phi \vee \neg \phi\) is always true, regardless of the truth of \(\phi\).  This simple example of a tautology is known as the <span class='defn'>law of the excluded middle</span>.  We can prove that it is a tautology with the construction of a truth table.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\neg \phi\)</th>
+        		<th>\(\phi \vee \neg \phi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Notice that the truth values in the column for \(\phi \vee \neg \phi\) are all true, regardless of what \(\phi\)'s truth is.  Conversely, a proposition which is always false, regardless of the truth of its component propositions, is known as a <span class='defn'>contradiction</span>.  The proposition \(\phi \wedge \neg \phi\) is a contradiction, as indicated by its truth table (all truth values are false).</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\neg \phi\)</th>
+        		<th>\(\phi \wedge \neg \phi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <h3>Logical equivalence</h3>
+        
+        <p>Now, consider the proposition \((\phi \to \psi) \leftrightarrow (\phi \vee \neg \psi)\).  This proposition is also a tautology, as indicated by its truth table.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\neg \phi\)</th>
+        		<th>\(\phi \to \psi\)</th>
+        		<th>\(\neg \phi \vee \psi\)</th>
+        		<th>\(\phi \to \psi) \leftrightarrow (\neg \phi \vee \psi)\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Effectively, the last column shows us that the proposition \(\phi \to \psi\) has the same truth value as \(\neg \phi \vee \psi\) in every case.  When two different propositions have the same truth value in every possible situation, we say that the two propositions are <em>logically equivalent</em>.  To define this more formally:
+        
+        <p class="indent1" style="font-size: 120%;">Any two propositions \(\phi\) and \(\psi\) are <span class='defn'>logically equivalent</span> (written as \(\phi \equiv \psi\)) if and only if the proposition \(\phi \leftrightarrow \psi\) is a tautology</p>
+        
+        <p>Many of the so-called 'laws' of logic are simply logical equivalences.  For example, one of the most well-known laws of logic, <span class='defn'>De Morgan's law</span>, is a logical equivalence that allows you to convert any conjunction into a disjunction, and vice-versa.</p>
+        
+        <p class="indent1">\(\neg(\phi \wedge \psi) \equiv \neg \phi \vee \neg \psi\)</p>
+        
+        <p>You can prove to yourself that this really is a logical equivalence by constructing the truth table for \(\neg(\phi \wedge \psi) \leftrightarrow (\neg \phi \vee \neg \psi)\) and confirming that it is a tautology.  If two propositions A and B are logically equivalent, you can substitute one for the other in any expression that contains them.  For example, consider the proposition \(E\) from the previous section.  Let \(F = A \wedge \neg B\) and \(G = C \vee D\).  We can then rewrite \(E\) as \(F \to G\).  But we know that \(F \to G\) is logically equivalent to \(\neg F \vee G\), as show above.  Therefore \(E \equiv \neg F \vee G\) \(\equiv \neg(A \wedge \neg B) \vee (C \vee D)\).  Logical equivalences are quite useful when it comes to proving logical arguments, providing a shortcut to constructing a proof.</p>
+        
+        <h3>Logical consequence</h3>
+        
+        <p>Finally, but most importantly, is the concept of <em>logical consequence</em>, which is formally defined as follows
+        </p>
+        
+        <p class="indent1" style="font-size: 120%;">The proposition \(\psi\) is a <span class='defn'>logical consequence</span> of the propositions \(\phi_1, \phi_2, ..., \phi_n\) (written \(\phi_1, \phi_2, ..., \phi_n \vDash \psi\)) if and only if \(\phi_1 \wedge \phi_2~\wedge  ... \wedge~\phi_n \to \psi\) is a tautology.</p>
+        
+        <p>The expression \(\phi_1, \phi_2, ..., \phi_n \vDash \psi\) is known as a <span class='defn'>sequent</span>.  This sequent declares that <em>if</em> we assume the propositions \(\phi_1, \phi_2, ..., \phi_n\) are true, we <em>must</em> conclude that \(\psi\) is true.  Does this sound familiar?  It should, it's essentially the structure of rules of inference such as modus ponens, as discussed at the beginning of the chapter. Logical consequences form the basis of the rules of inference for logic, where a list of propositions to the left of the \(\vDash\) symbol are the <em>premises</em> of the argument, and the proposition to the right of the \(\vDash\) forms the <em>conclusion</em>.  In the definition above, the propositions \(\phi_1, \phi_2, ..., \phi_n\) form the premises, and the proposition \(\psi\) is the conclusion.  Re-examining the rule of modus ponens, we can express this rule with the following sequent.</p> 
+        
+        <p class="indent1">\(\phi \to \psi, \phi \vDash \psi \)</p>
+        
+        <p>As per the definition above, this sequent is essentially stating that \(((\phi \to \psi) \wedge \phi) \to \psi \) is a tautology.  We can prove that modus ponens is indeed a valid rule of inference by constructing the truth table of \(((\phi \to \psi) \wedge \phi) \to \psi\), and indeed confirming that it is a tautology.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \to \psi\)</th>
+        		<th>\((\phi \to \psi) \wedge \phi\)</th>
+        		<th>\(((\phi \to \psi) \wedge \phi) \to \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Later in this chapter, the importance of logical consequences as the building blocks of logical arguments will be made obvious, as the rules of inference are introduced, and are used to derive proofs of some common laws of logic.</p>  
+        
+        <p>Logical consequences and logical equivalences are related in the following way:</p>
+        
+        <p class="indent1" style="font-size: 120%;">\(\phi \equiv \psi\) if and only if  \(\phi \vDash \psi\) and \(\psi \vDash \phi\)</p>
+        
+        <p>If you can prove that \(\phi\) is a logical consequence of \(\psi\), and vice-versa, you have shown that \(\phi\) and \(\psi\) are logically equivalent.  To understand why this assertion is sound, consider what the sequent \(\phi \vDash \psi\) means.  It means \(\phi \to \psi\) is a tautology.  If the reverse is also true, that \(\psi \to \phi\) is also a tautology, then the conjunction of these two propositions must also be a tautology, because the conjunction of two true values is always true.  That is, \((\phi \to \psi) \wedge (\psi \to \phi)\) is also a tautology.</p>
+        
+        <p>But \((\phi \to \psi) \wedge (\psi \to \phi)\) is logically equivalent to \(\phi \leftrightarrow \psi\).  That is, \(((\phi \to \psi) \wedge (\psi \to \phi)) \leftrightarrow (\phi \leftrightarrow \psi)\) is a tautology.  We can prove this with a truth table.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \to \psi\)</th>
+        		<th>\(\psi \to \phi\)</th>
+        		<th>\((\phi \to \psi) \wedge (\psi \to \phi)\)</th>
+        		<th>\(\phi \leftrightarrow \psi\)</th>
+        		<th>\(((\phi \to \psi) \wedge (\psi \to \phi)) \leftrightarrow (\phi \leftrightarrow \psi)\)
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Because we already know that \((\phi \to \psi) \wedge (\psi \to \phi)\) is a tautology, and we have shown that \(\phi \leftrightarrow \psi\) is logically equivalent to this, we have shown that \(\phi \leftrightarrow \psi\) is also a tautology.  That is, \(\phi \equiv \psi\)</p>
+        
+        <h3>Common notation</h3>
+        
+        <p>A quick mention should be made of some of the notations you may encounter in this book and in other texts.  A tautology is a proposition that is always true, independent of the truth value of its component propositions, as well as being independent of the truth of any other proposition.  That is, we can consider a tautology to be a conclusion with no premises, as we don't need to assume anything.  For this reason, if \(\phi\) is a tautology, it is often written as:</p>
+        
+        <p class="indent1">\(\vDash \phi\)</p>
+        
+        <p>You may also see it written as being logically equivalent to the constant \(\top\) (true).</p>
+        
+        <p class="indent1">\(\phi \equiv \top\)</p>
+        
+        <p>On the other hand, a contradiction is any proposition that is logically equivalent to the logical constant \(\bot\) (false).  Therefore, if \(\psi\) is a contradicition, it may be written as:</p>
+        
+        <p class="indent1">\(\psi \equiv \bot\)</p>
+        
+        <h2>Rules of inference</h2>
+        
+        <p>In propositional logic, it is possible to prove any logical argument by constructing an appropriate truth table.  For example, if we want to prove De Morgan's law (That is, \(\neg (\phi \wedge \psi) \equiv \neg \phi \vee \neg \psi\)), we can simply construct a truth table as follows:</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\neg \phi\)</th>
+        		<th>\(\neg \psi\)</th>
+        		<th>\(\phi \wedge \psi\)</th>
+        		<th>\(\neg (\phi \wedge \psi)\)</th>
+        		<th>\(\neg \phi \vee \neg \psi\)
+        		<th>\(\neg (\phi \wedge \psi) \leftrightarrow (\neg \phi \vee \neg \psi)\)
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Rules of inference allow us to do the same thing, but are far less cumbersome and time-consuming than truth tables.  But while truth tables may be long-winded, they are not difficult to do.  Proofs using inference rules require practice to master. However, it is a necessary skill.  This is because in the next chapter, where predicate logic is introduced, proof by truth table will no longer be available to us.  However, the rules of inference are.  Predicate logic is the system of logic on which mathematics is built.</p>
+        
+        <p>In this section, we show how to propose a logical argument, and how to prove that argument by introducing assumptions (premises), using the rules of inference to deduce other true statements from these assumptions, and by doing so reaching a conclusion that proves our argument.  Throughout, many examples of logical proofs will be exemplified, including a full proof of De Morgan's law using only the rules of inference.</p>
+         
+        <h3>Axiom rule</h3>
+        
+        <p>The axiom rule is the simplest of the inference rules, simply stating that if you assume any proposition \(\phi\), you can also conclude the same.  That is:</p>
+        
+        <p class="indent1" style="font-size: 120%;">\(\phi \vDash \phi\)</p>
+        
+        <p>This may seem like a statement of the obvious; it is essentially stating that \(\phi \to \phi\) is a tautology.  And if it's not obvious, the following truth table should exhibit that this rule of inference is sound.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\phi \to \phi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>The antecedent and the consequent of this material implication are the same; the only possible cases we can have is when \(\phi\) is true (in which case \(\phi \to \phi \equiv \top \to \top \equiv \top\)) and \(\phi\) is false (in which case \(\phi \to \phi \equiv \bot \to \bot \equiv \top\)).</p>
+        
+        
+        <h3>Conjunction introduction</h3>
+        
+        <p>The <span class='defn'>conjunction introduction</span> rule, abbreviated as  <span class='defn'>\({\wedge}I\)</span>, states that you can conclude that the proposition \(\phi \wedge \psi\) is true, if you assume \(\phi\) and \(\psi\) are true.  That is:</p>
+        
+        <p class="indent1" style="font-size: 120%;">\(\phi, \psi \vDash \phi \wedge \psi\)</p>
+        
+        <p>Given the definition of a logical consequence, this states that \(\phi \wedge \psi \to \phi \wedge \psi\) is a tautology.  We have already proven that any material implication where the antecedent and consequent are the same is a tautology, and therefore we can be satisfied that this rule of inference is sound.
+        
+        <h3>Conjunction elimination</h3>
+        
+        <p><span class='defn'>Conjunction elimination</span> (abbreviated as <span class='defn'>\({\wedge}E\)</span>) can be considered the inverse of conjunction introduction.  If we assume that \(\phi \wedge \psi\) is true, we can conclude that \(\phi\) is true, and \(\psi\) is true.  That is:</p>
+        
+        <p class="indent1" style="font-size: 120%;">\(\phi \wedge \psi \vDash \phi\)<br>\(\phi \wedge \psi \vDash \psi\)</p>
+        
+        <p>Again, this should be fairly obvious, but the following truth table shows that both \(\phi \wedge \psi \to \phi\) and \(\phi \wedge \psi \to \psi\) are tautologies, proving that these rules of inference are sound.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \wedge \psi\)</th>
+        		<th>\(\phi \wedge \psi \to \phi\)</th>
+        		<th>\(\phi \wedge \psi \to \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        
+        <h3>A first proof</h3>
+        
+        <p>With just these rules, we can build our first theorem, which proves the commutativity of the conjunction operator.  That is, we prove that \(\phi \wedge \psi \equiv \psi \wedge \phi\)  Admittedly, it is not the most exciting theorem to prove, as it seems pretty intuitive and can be just as easily demonstrated with a truth table, but it gives an early first example of how to construct a logical proof.  Remember, in order to prove the equivalence \(\phi \wedge \psi \equiv \psi \wedge \phi\), we need to prove both \(\phi \wedge \psi \vDash \psi \wedge \phi\) and \(\psi \wedge \phi \vDash \phi \wedge \psi\).  We begin by proving the first sequent.</p>
+        
+        <p>In this book, we will construct proofs in a format known as <span class='defn'>Fitch notation</span>.  This notation provides a layout where each line in the proof corresponds to either the introduction of an assumption (or premise), or an application of a rule of inference.  Each line is identified by a line number, allowing us to reference previous lines in future lines.  The diagram below is a Fitch notation proof of \(\phi \wedge \psi \vDash \psi \wedge \phi\).</p>
+          
+        
+
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(\phi \wedge \psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(\phi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(\psi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td>\(\psi \wedge \phi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}I: 3,2\)</td>
+            </tr>
+        </table></div>
+
+        <p>The first line of this proof introduces an assumption or premise.  Each time an assumption is introduced, subsequent lines of the proof are 'enclosed' using a horizontal and vertical line.  This indicates that subsequent lines of the proof are dependent on all assumptions outside of the enclosure.  This feature's true power will be demonstrated later in more advanced proofs.  In particular, it provides a convenient way of allowing us to keep track of assumptions, and even removing or <em>discharging</em> assumptions when they are no longer needed.</p>
+        
+        <p>In the second line we produce our first inference.  Given our assumption on line 1, the \({\wedge}E\) rule allows us to infer that the proposition \(\phi\) is true.  That is, the assumption on line 1 forms the premise of the \({\wedge}I\) rule on line 2, producing the conclusion that \(\phi\) is true.  Likewise, in the third line we use \({\wedge}E\) again to infer that the proposition \(\psi\) is true, where line 1 is again the premise for line 3.</p>  
+        
+        <p>Finally, in the last line (line 4), we use the \({\wedge}I\) rule to infer that \(\psi \wedge \phi\) is true.  We can do this because we have inferred from our original assumption of \(\phi \wedge \psi\) that \(\phi\) and \(\psi\) are true.  That is, lines 2 and 3 provide us with the premises for our final inference on line 4.  This last conclusion completes the proof, because we have shown from the assumption \(\phi \wedge \psi\) in line 1, that \(\psi \wedge \phi\) is true.  We have proven the sequent \(\phi \wedge \psi \vDash \psi \wedge \phi\).</p>
+        
+        <p>We must now also prove the sequent \(\psi \wedge \phi \vDash \phi \wedge \psi\), which we do in an almost identical way to proving \(\phi \wedge \psi \vDash \psi \wedge \phi\).</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(\psi \wedge \phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(\psi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(\phi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td>\(\phi \wedge \psi\)</td>
+                <td style="padding-left: 50px;">\({\wedge}I: 3,2\)</td>
+            </tr>
+        </table></div>
+        
+        <p>Having proven both \(\phi \wedge \psi \vDash \psi \wedge \phi\) and \(\psi \wedge \phi \vDash \phi \wedge \psi\), we have shown that \(\phi \wedge \psi \equiv \psi \wedge \phi\).</p>
+        
+        <p>In summary, a logical argument begins with a <span class='defn'>hypothesis</span> that we wish to prove.  In the example above, the hypothesis is described by the sequent \(\phi \wedge \psi \vDash \psi \wedge \phi\).  All premises to the left hand side of the \(\vDash\) will form the assumptions of our argument.  From these assumptions we wish to prove the proposition on the right of the \(\vDash\) (the conclusion).  This is achieved by applying rules of inference in succession.  Like a chain, the premises of each rule are sourced from the initial assumptions, or from the conclusions of previous rules in the proof.  Once the conclusion of the hypothesis has been reached, the hypothesis has been proven.  At this stage, the hypothesis becomes a <span class='defn'>theorem</span>.  Once a theorem has been created, it may be used in other proofs as a <em>derived</em> rule of inference.  Most mathematicians, when proving results in mathematics, do not directly create proofs using the primitive rules of inference.  Instead, they apply previously proved theorems in order to more succinctly and efficiently produce proofs.</p>
+        
+        
+        <h3>Implication introduction</h3>
+        
+        <p>The rule known as <span class='defn'>implication introduction</span> (abbreviated as <span class='defn'>\({\to}I\)</span>) allows us to remove or <em>discharge</em> premises from a sequent.  You may also see it being referred to as the <span class='defn'>deduction theorem</span>.</p>
+        
+        <p class="indent1" style="font-size: 120%;">If \(\phi_1, \phi_1, ..., \phi_n, \chi \vDash \psi\), then \(\phi_1, \phi_1, ..., \phi_n \vDash \chi \to \psi\).</p>
+        
+        <p>Notice that the premise \(\chi\) is removed from the left hand side of the sequent, and made into the antecedant of a material implication on the right side, hence the name <em>implication introduction</em>.  This rule cannot be proved with a truth table, as it is known as a <em>metalogical theorem</em>.  That is, it is a theorem <em>about logic itself</em> and not a theorem <em>within</em> logic.  Metalogic is the study of logic itself using mathematics, a topic that is beyond the scope of this book.  Rest assured, though, that this rule is sound, even if we do not have the sophistication to prove it at this level.  The following example shows how we can prove the sequent \(\vDash \phi \to (\psi \to \phi)\).  That is, we prove that \(\phi \to (\psi \to \phi)\) is a tautology.</p>  
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td colspan="2" style="border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto; border-bottom: 1px solid black">\(\psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\phi\)</td>
+                <td style="padding-left: 50px;">Axiom</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan="2">\(\psi \to \phi\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 3, \text{d}2\)</td>
+            </tr>
+            <tr>
+                <td>5.</td>
+                <td colspan="2">\(\phi \to (\psi \to \phi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 4, \text{d}1\)</td>
+            </tr>
+        </table></div>
+        
+        <p>The first line introduces an assumption that \(\phi\) is true.  The second line introduces another assumption that \(\psi\) is true.  Notice how each new assumption creates a new enclosure that nests within the enclosures of previous assumptions.  Line 3 simply reiterates our first assumption that \(\phi\) is true via the axiom rule.  At this point, the current active assumptions are \(\phi\) and \(\psi\).  Any assumptions that exist outside of the enclosure of the current line are available.  However, on line 4, we apply the \({\to}I\) rule, yielding the proposition \(\psi \to \phi\).  At the same time, we are allowed to <em>discharge</em>, or delete our assumption of \(\psi\).  This is indicated by the termination of the enclosure in which the assumption \(\psi\) is active.  From line 4 onwards, the assumption \(\psi\) can no longer be used.  The only assumption currently active at line 4 is the assumption \(\phi\).  On line 5, we apply the \({\to}I\) rule again, yielding the proposition \(\phi \to (\psi \to \phi)\), at the same time discharging the assumption on line 1.  So, at line 5, we have the final conclusion \(\phi \to (\psi \to \phi)\) with no currently active assumptions.  This means that we can conclude that \(\phi \to (\psi \to \phi)\) is true with no premises, proving that \(\vDash \phi \to (\psi \to \phi)\).</p>
+        
+        <p>Note that the \({\to}I\) rule <em>permits</em> you to discharge an assumption, but you are not obliged to do so.  For example, the following proof is a valid proof of \(\vDash \phi \to (\phi \to (\phi \to \phi))\).</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(\phi\)</td>
+                <td style="padding-left: 50px;">Axiom</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(\phi \to \phi\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 2, 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td>\(\phi \to (\phi \to \phi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 3, 1\)</td>
+            </tr>
+            <tr>
+                <td>5.</td>
+                <td>\(\phi \to (\phi \to (\phi \to \phi))\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 4, \text{d}1\)</td>
+            </tr>
+        </table></div>
+        
+        <p>Note that on lines 3 and 4, the \({\to}I\) rule is applied but no discharge of assumptions occur.  However, on line 5, the assumption on line 1 is finally discharged.</p>
+        
+        <h3>Implication elimination</h3>
+        
+        <p>The <span class='defn'>implication elimination rule</span> (abbreviated as <span class='defn'>\({\to}E\)</span>) should already be familiar to the reader; we have previously called it <em>modus ponens</em>.</p>
+        
+        <p class="indent1" style="font-size: 120%;">\(\phi \to \psi, \phi \vDash \psi\)</p>
+        
+        <p>The validity of this rule can be proven using the following truth table, which shows that \(((\phi \to \psi) \wedge \phi) \to \psi\) is a tautology.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \to \psi\)</th>
+        		<th>\((\phi \to \psi) \wedge \phi\)</th>
+        		<th>\(((\phi \to \psi) \wedge \phi) \to \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        
+        <p>We demonstrate the use of \({\to}E\) by proving the transitivity of material implication: \((\phi \to \psi), (\psi \to \chi) \vDash \phi \to \chi\)</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="3">\(\phi \to \psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\psi \to \chi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto; border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\psi\)</td>
+                <td style="padding-left: 50px;">\({\to}E: 1, 3\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\chi\)</td>
+                <td style="padding-left: 50px;">\({\to}E: 2, 4\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td colspan=2>\(\phi \to \chi\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 5, \text{d}3\)</td>
+            </tr>
+        </table></div>
+
+         <p>The proof begins by introducing the two assumptions of the sequent, followed by a third assumption that we will use temporarily to construct the proof, and then discharge later.  On line 4, we can infer that \(\psi\) is true using \({\to}E,\) given the assumptions on lines 1 and 3.  Similarly, we can infer that \(\chi\) is true, also using \({\to}E\), from lines 2 and 4.  Finally, using the result on line 5, we reach our final conclusion \(\phi \to \chi\), discharging the temporary assumption on line 3.  This is the end of the proof.  We do not need to discharge the assumptions on lines 1 and 2, because they form the original premises of our argument.</p>
+        
+        <h3>Equivalence introduction and elimination</h3>
+        
+        <p>The <span class='defn'>equivalence introduction</span> (<span class='defn'>\({\leftrightarrow}I\)</span>) and <span class='defn'>equivalence elimination </span>(<span class='defn'>\({\leftrightarrow}E\)</span>) rules should be fairly simple to understand, given that we have shown the connection between the \(to\( and \(leftrightarrow\( operators in the section on logical consequences.</p>
+        
+        <p class="indent1 of" style="font-size: 120%;">
+            \(\begin{array}{l}
+                \phi \to \psi, \psi \to \phi \vDash \phi \leftrightarrow \psi  & ({\leftrightarrow}I) \\
+                \phi \leftrightarrow \psi \vDash \phi \to \psi  & ({\leftrightarrow}E) \\
+                \phi \leftrightarrow \psi \vDash \psi \to \phi  & ({\leftrightarrow}E)
+            \end{array}
+        \)
+        </p> 
+        
+        <p>The truth table showing the validity of the \({\leftrightarrow}I\) rule is presented in the section on logical consequences.  The reader can satisfy the  validity of the two \({\leftrightarrow}E\) rules by constructing the truth tables showing that \((\phi \leftrightarrow \psi) \to (\phi \to \psi)\) and \((\phi \leftrightarrow \psi) \to (\psi \to \phi)\) are both tautologies.</p>
+        
+        <h3>Negation elimination</h3>
+        
+        <p>The <span class='defn'>negation elimination rule</span> (abbreviated as <span class='defn'>\({\neg}E\)</span>) states that if we have inferred a proposition and its negation simulataneously, a contradiction results.</p>  
+        
+        <p class="indent1 of" style="font-size: 120%;">\(\phi, \neg \phi \vDash \bot\)</p>
+        
+        <p>This should be a fairly obvious result, confirmed by the truth table below showing that \(\phi \wedge \neg \phi \to \bot\) is a tautology.  Because \(\phi \wedge \neg \phi\) is a contradiction, the antecedent of \((\phi \wedge \neg \phi) \to \bot\) is always false.  When the antecedent of an implication is false, the implication is always true, regardless of the consequent.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\neg \phi\)</th>
+        		<th>\(\phi \wedge \neg \phi\)</th>
+        		<th>\(\bot\)</th>
+        		<th>\((\phi \wedge \neg \phi) \to \bot\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>The usefulness of this rule will become apparent in the sections to follow.</p>
+        
+        <h3>Negation introduction and reductio ad absurdum</h3>
+        
+        <p>The rule of <span class='defn'>negation introduction</span> (abbreviated as <span class='defn'>\({\neg}I\)</span>) and <span class='defn'>reductio ad absurdum</span> (abbreviated as <span class='defn'>RAA</span>) are two very similar rules of inference that allow us to discharge assumptions.</p>
+        
+        <p class="indent1 of" style="font-size: 120%;">
+        \(
+        \begin{array}{l}
+            \text{If }\phi_1, \phi_2, ..., \phi_n, \psi \vDash \bot \text{, then }\phi_1, \phi_2, ..., \phi_n \vDash \neg \psi.  & ({\neg}I) \\
+            \text{If }\phi_1, \phi_2, ..., \phi_n, \neg \psi \vDash \bot \text{, then }\phi_1, \phi_2, ..., \phi_n \vDash \psi.  & (RAA) \\
+        \end{array}
+        \)
+        </p>
+        
+        <p>Just as with the \({\to}I\) rule, these rule are a consequence of the <em>deduction theorem</em>.  These rules are extremely useful in mathematics, being the mechanism allowing <em>proof by contradiction</em>.  In such an argument, a mathematician will introduce an assumption \(\psi\).  If further in the proof we can show that such an assumption leads to a contradiction, we have proven that the opposite of the assumption (\(\neg \psi\)) is true, at the same time discharging the original assumption.  Alternatively, we could assume that some proposition \(\psi\) is false.  Showing that a contradiction results from such an assumption shows us that \(\psi\) must be true.  The two rules above are essentially the same thing.</p>
+        
+        <p>To prove that \({\neg}I\) is valid, observe that from the deduction theorem, it follows that \(\phi_1, \phi_2, ..., \phi_n, \psi \vDash \bot\), then \(\phi_1, \phi_2, ..., \phi_n \vDash \psi \to \bot\).  But \(\psi \to \bot\) is logically equivalent to \(\neg \psi\), demonstrated via the following truth table.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\psi\)</th>
+        		<th>\(\neg \psi\)</th>
+        		<th>\(\bot\)</th>
+        		<th>\(\psi \to \bot\)</th>
+        		<th>\((\psi \to \bot) \leftrightarrow \neg \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>Proving that RAA is valid is perfomed in essentially the same way, but we instead show that \(\neg \psi \to \bot \equiv \psi\) via a truth table.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\psi\)</th>
+        		<th>\(\neg \psi\)</th>
+        		<th>\(\bot\)</th>
+        		<th>\(\neg \psi \to \bot\)</th>
+        		<th>\((\neg \psi \to \bot) \leftrightarrow \psi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>With the \({\neg}E\), \({\neg}I\) and \(RAA\) rules, we can now prove another basic law of logic: the <em>double negation law</em>.  That is, \(\neg(\neg \phi) \equiv \phi\).  We need to show that \(\neg(\neg \phi) \vDash \phi\) and \(\phi \vDash \neg(\neg \phi)\).  The proof for the first sequent is shown below:</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\neg(\neg\phi)\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\neg\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(\bot\)</td>
+                <td style="padding-left: 50px;">\({\neg}E: 1,2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan=2>\(\phi\)</td>
+                <td style="padding-left: 50px;">RAA: 3, d2</td>
+            </tr>
+        </table></div>
+        
+        <p>We begin by assuming \(\neg(\neg \phi)\) and \(\neg \phi\).  Since the proposition \(\neg \phi\) and its negation are both assumed to be true, we have produced a contradiction on line 3.  Using RAA, we are permitted to discharge the assumption \(\neg \phi\) and conclude \(\phi\).  The only assumption left is \(\neg(\neg \phi)\).  Therefore, we have shown that \(\neg(\neg \phi) \vDash \phi\)</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\neg\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(\bot\)</td>
+                <td style="padding-left: 50px;">\({\neg}E: 1,2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan=2>\(\neg(\neg\phi)\)</td>
+                <td style="padding-left: 50px;">\(\neg\)I: 3, d2</td>
+            </tr>
+        </table></div>
+        
+        <p>The second sequent is proven in almost the same way, except that we make use of the \({\neg}I\) rule to discharge one of the original assumptions (\(\neg \phi\)) and allow us to conclude \(\neg (\neg \phi)\).  The only assumption left on the first line is \(\phi\).  Therefore, we have proven that \(\phi \vDash \neg(\neg \phi)\).  By proving both sequents, we can conclude that \(\neg(\neg \phi) \equiv \phi\).</p>
+        
+        <p>One final example proves the sequent \(\bot \vDash \phi\).  That is, from a contradiction, we can conclude anything we want.  This rule is sometimes called by its Latin name: <em>ex falso quodlibet</em> or <em>EFQ</em>.  This literally means: 'From falsehood, (you can prove) anything'.</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\bot\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\neg\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(\bot\)</td>
+                <td style="padding-left: 50px;">Axiom</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan=2>\(\phi\)</td>
+                <td style="padding-left: 50px;">RAA: 3, d2</td>
+            </tr>
+        </table></div>
+        
+        <h3>Disjunction introduction</h3>
+        
+        We now define the <span class='defn'>disjunction introduction</span> rules (abbreviated as <span class='defn'>\({\vee}I\)</span>), as follows:
+        
+        <p class="indent1 of" style="font-size: 120%;">\(\phi \vDash \phi \vee \psi\)<br>
+        \(\phi \vDash \psi \vee \phi\)</p>
+        
+        <p>That is, if you assume \(\phi\) is true, then you can conclude that \(\phi \vee \psi\) and \(\psi \vee \phi\) are true, where \(\psi\) can be any proposition.  This should be fairly obvious, given that if any of the operands to \(\vee\) are true, then the whole thing is true.  A truth table confirms this by showing that \(\phi \to (\phi \vee \psi)\) and \(\phi \to (\psi \vee \phi)\) are tautologies.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\phi \vee \psi\)</th>
+        		<th>\(\psi \vee \phi\)</th>
+        		<th>\(\phi \to (\phi \vee \psi)\)</th>
+        		<th>\(\phi \to (\psi \vee \phi)\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>With the introduction of this law, we can prove the <em>law of the excluded middle</em> (\(\vDash \phi \vee \neg \phi\)), which we have already been able to prove using a truth table in the section above.  In this particular case, proof using the rules of inference is more complicated than it is to construct the truth table.</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\neg(\phi \vee \neg \phi)\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto;">\(\phi \vee \neg \phi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\bot\)</td>
+                <td style="padding-left: 50px;">\({\neg}E: 1, 3\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td colspan=2>\(\neg \phi\)</td>
+                <td style="padding-left: 50px;">\({\neg}I: 4, \text{d}2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td colspan=2>\(\phi \vee \neg \phi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 5\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">7.</td>
+                <td colspan=2>\(\bot\)</td>
+                <td style="padding-left: 50px;">\({\neg}E: 1, 6\)</td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td colspan=2>\(\phi \vee \neg \phi\)</td>
+                <td style="padding-left: 50px;">\(RAA: 7, \text{d}1\)</td>
+            </tr>
+        </table></div>
+        
+        <p>The first two lines begin with the introduction of two assumptions, \(\neg (\phi \vee \neg \phi)\) and \(\phi\).  From the assumption on line 2, we can conclude on line 3 that \(\phi \vee \neg \phi\) is true, using the first \({\vee}I\) rule.  Notice now that lines 1 and 3 form a contradiction, so using the \({\neg}E\) rule, we can conclude \(\bot\) at line 4.  To remove this contradiction, we discharge our assumption on line 2 (\(\phi\)) and conclude the negation of it (\(\neg \phi\)) by applying the \({\neg}I\) rule on line 5.  But line 5 allows us to conclude that \(\phi \vee \neg \phi\) because of the second \({\vee}I\) rule, resulting in line 6.  Another contradiction occurs between lines 1 and 6, allowing us to ultimately discharge our first assumption and concluding \(\phi \vee \neg \phi\) using the RAA rule.  Since we have concluded \(\phi \vee \neg \phi\) and have no active assumptions, we have proven \(\vDash \phi \vee \neg \phi\).</p>
+        
+        <h3>Disjunction elimination</h3>
+        
+        <p>The <span class='defn'>disjunction elimination</span> rule (abbreviated as <span class='defn'>\({\vee}E\)</span>) is our final rule of inference.</p>
+        
+        <p class="indent1 of" style="font-size: 120%;">\(\phi \to \chi, \psi \to \chi, \phi \vee \psi \vDash \chi\)<p>
+        
+        An intuitive understanding of this rule can be obtained from the following example.  Consider the following propositions:
+        
+        <p class='indent1 of'>\(P = \text{James eats his vegetables}\)<br>
+        \(Q = \text{James does his homework}\)<br>
+        \(R = \text{James will get dessert}\)
+        </p>
+        
+        <p>Now, lets accept that the following premises are true:</p>
+        
+        <p class='indent1 of'>
+        \(\begin{array}{l}
+        P \to R  & \text{If James eats his vegetables, then he will get dessert} \\
+        Q \to R  & \text{If James does his homework, then he will get dessert} \\
+        P \vee Q & \text{James eats his vegetables or does his homework}
+        \end{array}
+        \)
+        </p>
+         
+        <p>From these premises it should be obvious that James will get dessert, because he has either eaten his vegetables, or done his homework, or both.  That is, we can conclude \(R\).  The following truth table confirms the validity of this rule.</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>\(\phi\)</th>
+        		<th>\(\psi\)</th>
+        		<th>\(\chi\)</th>
+        		<th>\(\phi \to \chi\)</th>
+        		<th>\(\psi \to \chi\)</th>
+        		<th>\(\phi \vee \psi\)</th>
+        		<th>\((\phi \to \chi) \wedge (\psi \to \chi) \wedge (\phi \vee \psi)\)</th>
+        		<th>\(((\phi \to \chi) \wedge (\psi \to \chi) \wedge (\phi \vee \psi)) \to \chi\)</th>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\top\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\bot\)</td>
+        		<td>\(\top\)</td>
+        	</tr>
+            </tbody>
+        </table></div>
+        
+        <p>With this final rule of inference, we can now prove the commutativity of disjunction.  That is, we prove \(\phi \vee \psi \equiv \psi \vee \phi\) by showing that \(\phi \vee \psi \vDash \psi \vee \phi\) and \(\psi \vee \phi \vDash \phi \vee \psi\).  We prove the first sequent thus:</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\phi \vee \psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto;">\(\psi \vee \phi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan=2>\(\phi \to (\psi \vee \phi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 3, d2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(\psi \vee \phi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 5\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">7.</td>
+                <td colspan=2>\(\psi \to (\psi \vee \phi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 6, \text{d}5\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">8.</td>
+                <td colspan=2>\(\psi \vee \phi\)</td>
+                <td style="padding-left: 50px;">\({\vee}E: 1,4,7\)</td>
+            </tr>
+        </table></div>
+        
+        <p>From our assumption \(\phi \vee \psi\) on line 1, we can derive the conclusion on lines 4 and 7 using the \({\vee}I\) and \({\to}I\) rules.  Lines 1, 4 and 7 have the same form as the assumptions of the \({\vee}E\) rule.  That is, imagine we substitute \(\psi \vee \phi\) for \(\chi\) in our definition of the rule.  We would then have \(\phi \to (\psi \vee \phi), \psi \to (\psi \vee \phi), \phi \vee \psi \vDash \psi \vee \phi\).  Therefore, we conclude that \(\psi \vee \phi\) whenever we assume \(\phi \vee \psi\).  The second sequent is proven in a similar way, with some propositions swapped.
+        </p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan="2">\(\psi \vee \phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\phi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto;">\(\phi \vee \psi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td colspan=2>\(\phi \to (\phi \vee \psi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 3, d2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(\psi\)</td>
+                <td style="padding-left: 50px;">P</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(\phi \vee \psi\)</td>
+                <td style="padding-left: 50px;">\({\vee}I: 5\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">7.</td>
+                <td colspan=2>\(\psi \to (\phi \vee \psi)\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 6, \text{d}5\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">8.</td>
+                <td colspan=2>\(\phi \vee \psi\)</td>
+                <td style="padding-left: 50px;">\({\vee}E: 1,4,7\)</td>
+            </tr>
+        </table></div>
+        
+        <p>Having proven that \(\phi \vee \psi \vDash \psi \vee \phi\) and \(\psi \vee \phi \vDash \phi \vee \psi\) are valid arguments, we have proven \(\phi \vee \psi \equiv \psi \vee \phi\).</p>
+        
+        <h3>Various laws of logic</h3>
+        
+        <p>Proving arguments from the primitive rules of inference can be a tedious task.  For this reason, many proofs use previously derived theorems as a shortcut to proving larger theorems.  Some of the most well-known theorems of logic are listed below:</p>
+        
+        <div class="of_table"><table class="min">
+          <tbody>
+            <tr>
+        		<th>Theorem</th>
+        		<th>Common name</th>
+        	</tr>
+            <tr>
+        		<td>\(\vDash \phi \vee \neg \phi\)</td>
+        		<td rowspan='2'>Negation laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \wedge \neg \phi \vDash \bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\vDash \phi \vee \top\)</td>
+        		<td rowspan='2'>Domination laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \wedge \bot \vDash \bot\)</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \wedge \top \equiv \phi\)</td>
+        		<td rowspan='2'>Identity laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \vee \bot \equiv \phi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \wedge \phi \equiv \phi\)</td>
+        		<td rowspan='2'>Idempotent laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \vee \phi \equiv \phi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\neg (\neg \phi) \equiv \phi\)</td>
+        		<td>Double negation law</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \wedge \psi \equiv \psi \wedge \phi\)</td>
+        		<td rowspan='3'>Commutative laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \vee \psi \equiv \psi \vee \phi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \leftrightarrow \psi \equiv \psi \leftrightarrow \phi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \wedge (\psi \wedge \chi) \equiv (\phi \wedge \psi) \wedge \chi\)</td>
+        		<td rowspan='3'>Associative laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \vee (\psi \vee \chi) \equiv (\phi \vee \psi) \vee \chi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \leftrightarrow (\psi \leftrightarrow \chi) \equiv (\phi \leftrightarrow \psi) \leftrightarrow \chi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \wedge (\psi \vee \chi) \equiv (\phi \wedge \psi) \vee (\phi \wedge \chi)\)</td>
+        		<td rowspan='2'>Distributive laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \vee (\psi \wedge \chi) \equiv (\phi \vee \psi) \wedge (\phi \vee \chi)\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \to \psi,  \psi \to \chi \vDash \phi \to \chi\)</td>
+        		<td rowspan='2'>Transitivity laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \leftrightarrow \psi,  \psi \leftrightarrow \chi \vDash \phi \leftrightarrow \chi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\neg (\phi \wedge \psi) \equiv \neg \phi \vee \neg \psi\)</td>
+        		<td rowspan='2'>De Morgan's laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\neg (\phi \vee \psi) \equiv \neg \phi \wedge \neg \psi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \vee (\phi \wedge \psi) \equiv \phi\)</td>
+        		<td rowspan='2'>Absorption laws</td>
+        	</tr>
+            <tr>
+        		<td>\(\phi \wedge (\phi \vee \psi) \equiv \phi\)</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \to \psi \equiv \neg \psi \to \neg \phi\)</td>
+        		<td>Contrapositive law</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \to \psi, \phi \vDash \psi\)</td>
+        		<td>Modus ponens</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \to \psi, \neg \psi \vDash \neg \phi\)</td>
+        		<td>Modus tollens</td>
+        	</tr>
+           <tr>
+        		<td>\(\phi \vee \psi, \neg \phi \vDash \psi\)</td>
+        		<td>Disjunctive syllogism</td>
+        	</tr>
+        	<tr>
+        		<th colspan='2'>Various other logical equivalences and consequences</th>
+            </tr>
+           <tr>
+                <td colspan='2'>
+        			\(\phi \to \psi \equiv \neg \phi \vee \psi\)<br>
+        			\(\neg (\phi \to \psi) \equiv \phi \wedge \neg \psi\)<br>
+        			\(\phi \vee \psi \equiv \neg \phi \to \psi\)<br> 
+        			\(\phi \wedge \psi \equiv \neg (\phi \to \neg \psi)\)
+        		</td>
+        	</tr>
+        	<tr>
+        		<td colspan='2'>				
+        			\((\phi \to \psi) \wedge (\phi \to \chi) \equiv \phi \to (\psi \wedge \chi)\)<br> 
+        			\((\phi \to \psi) \vee (\phi \to \chi) \equiv \phi \to (\psi \vee \chi)\)<br>
+        			\((\phi \to \chi) \wedge (\psi \to \chi) \equiv (\phi \vee \psi) \to \chi\)<br>
+        			\((\phi \to \chi) \vee (\psi \to \chi) \equiv (\phi \wedge \psi) \to \chi\)
+        		</td>
+        	</tr>
+        	<tr>
+        		<td colspan='2'>
+        			\(\phi \leftrightarrow \psi \equiv (\phi \to \psi) \wedge (\psi \to \phi)\)<br>
+        			\(\phi \leftrightarrow \psi \equiv \neg \phi \leftrightarrow \neg \psi\)<br>
+        			\(\phi \leftrightarrow \psi \equiv (\phi \wedge \psi) \vee (\neg \phi \wedge \neg \psi)\)<br>
+        			\(\neg (\phi \leftrightarrow \psi) \equiv (\phi \wedge \neg \psi) \vee (\neg \phi \wedge \psi)\)<br>
+        			\(\neg (\phi \leftrightarrow \psi) \equiv \phi \leftrightarrow \neg \psi \equiv \neg \phi \leftrightarrow \psi\)
+        		</td>
+        	</tr>
+        	<tr>
+        		<td colspan='2'>
+        			\(\phi \to \psi,  \psi \to \chi, \chi \to \psi \vDash (\phi \leftrightarrow \psi) \wedge (\psi \leftrightarrow \chi) \wedge (\chi \leftrightarrow \psi)\)
+        		</td>
+        	</tr>
+          </tbody>
+        </table></div>
+        
+        <h3>Logic and proof systems</h3>
+        
+        <p>A <span class='defn'>proof system</span> or <span class='defn'>proof calculus</span> is any system that allows us to prove logical theorems.  Each proof system defines a mechanism that allows the derivation of logical theorems using rules of inference.  The proof system presented in this chapter is known as <span class='defn'>natural deduction</span>.  Other proof systems exist, such as <em>Hilbert calculus</em>.  However, all of these systems are equivalent in the sense that they achieve the same end.  That is, all thereoms provable in one system can be proven in the other.  It is important that the proof system used (and the rules of inference for that system) is clearly communicated to the reader of the proof, in order for the reader to be able to follow the proof.</p> 
+    </div>
+</body>
+</html>

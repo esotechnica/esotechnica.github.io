@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-GB" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+	<title>Create Win10 boot USB in Linux: Windows 10 administration</title>
+	<base href="https://esotechnica.com">	
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<h1 class="site_banner" title="Esotechnica" onclick="location.href = '#';" style="cursor: pointer">&#8714;&int;&empty;&#8868;&#8714;&sub;&#8463;&#8469;|&sub;&and;&gt;&nbsp;&#9632;</h1>
+	<p class="site_description">my  $misc::nerdy-&gt;stuff</p>
+	
+	<div id="main_content" class="article">
+        <h1>Creating a Bootable Windows 10 USB in Linux</h1>
+        
+        <p>To install Windows 10 on your device, you will require a Windows 10 installation medium, such as a bootable DVD or USB drive. If you are running Windows already, this is simple. Just navigate to the <a href="https://www.microsoft.com/en-gb/software-download/windows10">Windows 10 download page</a>, download the media creation tool, and run it.  Following the simple wizard dialogues should quite painlessly allow you to create either a DVD or USB installation medium.  But if you are not running Windows already, the media creation tool is not available to you.  In fact, the link above will detect if you are running on a non-Windows platform, and redirect you to a different page that instead allows you to download a Windows 10 installation ISO file.  This short guide describes the best way to create bootable Windows 10 USB media from the ISO file on a Linux system.</p>
+
+        <h2>Considerations</h2>
+        <p>My motivation for creating this guide was to create a Windows installation medium that is as flexible as can be, working on as many platforms as possible.  It is a response to some of the how-to guides out there on the same topic which fail to highlight some of the caveats one might encounter. It can be frustrating when following a set of instructions that works for some, doesn't work for you.  This article will hopefully give some insight into avoiding the pitfalls of system firmware differences, file system limitations and the like, to create an installation medium that should work on any system.</p>
+        
+        <p>The first consideration to make was the choice of medium.  With your ISO file in hand, it would simply be a matter of burning this image to a blank DVD.  All done!  But if we want a truly all-purpose medium to install Windows on any system, a USB storage device such as a flash drive is your best bet.  USB interfaces are ubiquitous on all devices these days.  DVD optical drives, on the other hand, are often not installed by default on modern PCs, as the era of streaming media becomes dominant.  And they are not present on portable devices such as tablets and 2-in-1 devices.</p>
+        
+        <p>One of my goals was to create a USB medium that could boot on modern systems that use UEFI firmware, and also on older systems that use the legacy BIOS boot protocol.  UEFI is now the de facto standard for system firmware these days, but there are probably some legacy systems still out there.  The legacy BIOS boot protocol, commonly referred to as <em>MBR</em>, is a boot protocol that has changed little since the first IBM PCs in the 1980s.  In this protocol, the BIOS loads the first sector of the storage medium called the <em>master boot record </em>(MBR), looks for a 'magic signature' to tell if it is a bootable device and, if it is, executes the code in this sector.  The MBR is responsible for loading the rest of the operating system/installation setup/etc.  The UEFI boot protocol improves on the MBR method by eliminating the need for a boot sector.  Instead, the firmware can read FAT32 filesystems directly and locate bootable images.  This means creating a bootable Windows USB device for a UEFI system is as simple as copying the Windows 10 installation files to a FAT32 formatted USB drive.</p>
+        
+        <p>Or at least it was.  Many articles that detail this process are now out of date. With recent updates to the Windows 10 build, some of the installation files now exceed 4Gb in size.  FAT32 file systems have a file size limitation of 4Gb.  In order to avoid this situation, some have suggested formatting the file system with NTFS or exFAT.  Unfortunately, this is bad advice.  This is <strong>not</strong> a portable method.  The UEFI specification states that the firmware is only required to understand the FAT32 file system format.  So what are we to do?</p>
+        
+        <h2>The solution</h2>
+
+        <p>Thankfully someone has already created a simple, easy to use tool that accomplishes all of the objectives above.  The <a href="https://github.com/WoeUSB/WoeUSB">WoeUSB project</a> takes a Windows installation ISO file and a USB drive, and will create a bootable installation medium that will work on any system.  In particular:</p>
+
+        <ul>
+            <li>WoeUSB creates a USB drive that is both MBR and UEFI boot capable.</li>
+            <li>Bypasses the issue with FAT32 file size limitations, by automatically splitting the installation files into smaller chunks that are under 4Gb in size</li>
+        </ul>
+
+        <p>Most Linux distributions will have a package for WoeUSB that can be installed with your package management system.  This is the preferred method as it should handle all dependencies.  Otherwise, WoeUSB is a simple stand-alone bash script (within the <code>sbin</code> folder) that can be downloaded from the GitHub page in the link above - just be sure to read through the dependencies list and install them before running it.</p>
+
+        <h2>Instructions</h2>
+
+        <ol>
+            <li>Download the Windows ISO image from <a href="https://www.microsoft.com/en-au/software-download/windows10ISO">this page</a>.  Select the language and architecture you want, then begin the download</li>
+            <li>Check the download is not corrupted by running <code>sha256sum</code> on the ISO file downloaded.  Compare the result with the appropriate entry of the checksum table on the download page. </li>
+            <li>Insert a USB storage device which will be used as the installation medium.  <span style="color: #ff0000;">NOTE:  The entire contents of this drive will be wiped!</span>  Determine the name of the device via <code>lsblk</code>.  For example, my device is /dev/sdc</li>
+            <li>Run WoeUSB. <br><code>sudo woeusb --device &lt;path_to_ISO_file&gt; &lt;usb_device_path&gt;</code> </li>
+        </ol>
+
+        <p>Thats it!  You should now have a bootable USB drive that will run on any system.</p>
+    </div>
+</body>
+</html>

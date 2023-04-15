@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-GB" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+	<title>Foundations of Mathematics: Predicate logic</title>
+    <base href="https://esotechnica.com">
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        MathJax = {
+          tex: {
+        	  macros: {
+        		   uvec: ["{\\mathbf #1}", 1],
+        		   bvec: ["{\\mathbf #1}", 1],
+                   avec: ["{\\vec #1}", 1]
+        	  }
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
+</head>
+<body>
+	<h1 class="site_banner" title="Esotechnica" onclick="location.href = '#';" style="cursor: pointer">&#8714;&int;&empty;&#8868;&#8714;&sub;&#8463;&#8469;|&sub;&and;&gt;&nbsp;&#9632;</h1>
+	<p class="site_description">my  $misc::nerdy-&gt;stuff</p>
+
+	<div id="main_content" class="article">
+	    <div class="nav-container">
+	        <p class="breadcrumb"><a href="#">Home</a> &gt; <a href="docs/math/math_found_intro.html">Foundations of Mathematics</a> &gt; Predicate Logic</p>
+	        <div class="nav_buttons"><a href="docs/math/math_found_prop_logic.html">&larr;</a> <a href="docs/math/math_found_intro.html">&uarr;</a> &rarr;</div>
+	    </div>
+        <h1>Chapter 2: Predicate logic</h1>
+        
+        <p>In the previous chapter, a system for propositional logic was introduced, providing the ability to construct and prove logical arguments from <em>propositions</em>.  However, propositional logic has severe limitations, one of which is that it restricts us to statements about specific individuals or relationships, without the power to make general statements about a collection of individuals and their relationships.  As an example, consider the following argument.</p>
+        
+        \[
+        \small{
+        \begin{array}{l}
+        \text{If Max is a dog, then Max is a mammal}\\
+        \text{Max is a dog}\\
+        \hline
+        \text{Max is a mammal}
+        \end{array}
+        }
+        \]
+        
+        <p>This argument is valid; it is a simple application of the modus ponens, or \({\to}E\), rule of inference.  This argument is specifically restricted to a dog named Max, a single individual.  Being a mammal is not specific to just Max the dog, but to <em>all</em> dogs.  However, propositional logic does not have the power to express this general property of all dogs, so that we may conclude that any dog is a mammal.  That is, we cannot construct an argument of the following type.</p>
+        
+        \[
+        \small{
+        \begin{array}{l}
+        \text{All dogs are mammals}\\
+        \text{Max is a dog}\\
+        \hline
+        \text{Max is a mammal}
+        \end{array}
+        }
+        \]
+        
+        <p>The only possible way to achieve this in propositional logic is to exhaustively construct an argument (in the form of the first argument above) for every dog that exists.  As you can no doubt see, this is tedious and impractical at best, and simply impossible for infinite collections of individuals.  Enter <span class='defn'>predicate logic</span>, a system of logic that provides us with the power to construct arguments such as the second argument above.  Predicate logic extends propositional logic by allowing us to describe the properties of, and relationships that exist between, <em>collections</em> of individuals.  It adds the equivalent of English words like 'every', 'some' or 'none' to our logical vocabulary.  This is achieved by introducing two new features: the <span class='defn'>predicate</span>, and new logical operators known as <span class='defn'>quantifiers</span>.  Before we launch into a discussion about these new features, let's first clarify what we mean by a collection of individuals.</p>
+        
+        <h2>Domain of discourse</h2>
+        
+        <p>The fundamental importance of logic to mathematics is that it allows us to describe the properties of mathematical objects, and their relationship to each other.  For example, the commutative law of multiplication, often written as \(a \times b = b \times a\), declares a fundamental property of the multiplication operation.  However, this law only applies to certain objects, such as numbers, and may not apply to other mathematical objects.  For example, matrix multiplication is not commutative.  That is, for any two matrices \(A\) and \(B\), in general \(a \times b \neq b \times a\).  This example demonstrates that the truth of a logical statement is contingent on the collection of objects under consideration.  It is therefore important that we clearly define, for each logical statement that we make, what this collection is.  The entire collection of objects or individuals under consideration is known as the <span class='defn'>domain of discourse</span>, or simply, <span class='defn'>domain</span>.  The statement \(a \times b = b \times a\) applies over several domains, such as the domain of natural numbers, the domain of integers, the domain of real numbers and the domain of complex numbers.  It does not, however, apply over the domain of all matrices.</p>
+        
+        <p>Each individual object within the domain is known as an <span class='defn'>element</span> of the domain.  For example, the number 'two' is an element of the domain of natural numbers, and 'Bob Hawke' is an element of the domain of Australian prime ministers.  Each element within the domain may have an identifier which represents or names that element.  This identifier is known as a <span class='defn'>constant</span>.  For example, the number two is represented by the constant symbol 2.  The ratio of every circle's circumference to its diameter is a number represented by the constant symbol \(\pi\).  Importantly, a constant must identify one and only one element of a domain; that is, it is unique to that element.  If we consider the domain of all citizens of the United States, the full name of each citizen (element) is not sufficient as a constant representing that citizen, because it is possible for more than one citizen to have the same full name.  A constant representing each element of the domain would have to be something unique, such as a social security number or some other unique identifier.</p>
+        
+        <p>A domain may contain a finite or infinite number of elements.  An example of a finite domain would be the domain of all living or dead monarchs of England.  In mathematics, we typically deal with domains that are infinite.  For example, the domain of natural numbers is infinite because we can count forever; there is no largest natural number.</p>
+        
+        <h2>Predicates and formulas </h2>
+        
+        <p>As we already know, a proposition is limited to making statements about a single individual, such as 'Max is a dog', or a specific relationship between individuals, such as '12 is greater than 6'.  The truth of a proposition is defined by the proposition alone; we require no other information, assuming we are familiar with the individuals and circumstances involved.  A predicate, on the other hand, can be thought of as a proposition with information missing, a sort of <em>template</em> for a proposition.  The missing information in a predicate definition is represented by placeholders known as <span class='defn'>variables</span>.  The following are examples of predicate definitions:</p>
+        
+        <p class='indent1 of'>\(P(x)\) = 'The square of \(x\) is \(25\)'.<br>
+        \(Q(a,b)\) = '\(a\) is less than \(b\)'.<br>
+        \(R(x,y,z)\) = 'If \(x\) is less than \(y\), and \(y\) is less than \(z\), then \(x\) is less than \(z\)'.
+        </p>
+        
+        <p>The predicate \(P\) has a single variable, \(x\). Predicates having one variable are known as <em>unary</em> predicates.  \(Q\) has two variables (\(a\) and \(b\)), and so is known as a <em>binary</em> predicate.  Finally, \(R\) has three variables (\(x\), \(y\) and \(z\)), so is known as a <em>ternary</em> predicate.  In general, a predicate with \(n\) variables is known as an <em>n-ary</em> predicate.  We can consider propositions as a special case of predicate that has no variables (a <em>0-ary</em> predicate).  As such, propositional logic can be considered to be a subset of predicate logic.</p>
+        
+        <p>Like propositions, predicates yield a truth value (\(\top\) or \(\bot\)), but can only do so once they are <span class='defn'>instantiated</span>.  Instantiation is the process of substituting each variable within the predicate with some element from the specified domain of discourse.  Let's assume that the domain of \(P\) is the natural numbers.  The expression \(P(3)\) represents the predicate \(P\) after it has been instantiated by substituting \(x\) with the natural number 'three' (represented by the constant 3).  We can now evaluate the truth of \(P(3)\), which is the expression 'The square of 3 is 25'.  This is clearly false, therefore the value of \(P(3)\) is \(\bot\).  In fact, the predicate \(P\) evaluates to \(\bot\) for every possible instantiation, except for \(P(5)\).  That is, there exists only one element of the natural numbers (5) for which \(P\) is true.  If the domain of \(P\) was the set of integers, then there are exactly two elements of the integers for which \(P\) is true (5 and -5).  This example highlights the importance of ensuring the domain of discourse is clear in any logical argument.</p>  
+        
+        <p>As with propositions, we can create more complex logical statements by combining predicates together with the logical operators that we were acquainted with in the previous chapter.  Logical expressions constructed from predicates (instantiated or not) and logical operators are known as <span class='defn'>formulas</span>.  The simplest formulas are those composed of a single predicate, known as <span class='defn'>atomic formulas</span>.  For example, the expressions \(Q(a,b)\) and \(P(12)\) are atomic formulas.  All other formulas are known as <span class='defn'>compound formulas</span>.  The predicate \(R\) defined above is in fact equivalent to the following compound formula, expressed in terms of \(Q\).</p>
+        
+        <p class='indent1 of'>\(R(x,y,z) \equiv (Q(x,y) \wedge Q(y,z)) \to Q(x,z)\)</p>
+        
+        <p>As with predicates, formulas can only be evaluated for truth if all component predicates have been instantiated.  That is, each variable in the formula must be substituted with an element from the domain.  A formula whose truth is determinate because it has been fully instantiated is known as a <span class='defn'>closed formula</span> or <span class='defn'>sentence</span>.  All other formulas are known as <span class='defn'>open formulas</span>.  The formula \(Q(a,2) \to Q(7,a)\) is an open formula; we cannot evaluate the truth of the formula because \(a\) is unknown.  However, \(P(0) \vee P(5)\) is a sentence, and evaluates to \(\top\).</p>
+        
+        <p>One final definition is necessary before concluding this section.  The parameters enclosed in parentheses that follow a predicate's name, whether they be variables or constants, are known in predicate logic as <span class='defn'>terms</span>.  A term represents an element from the domain of discourse.  Variables are terms that act as a representative for some element of the domain, whereas constants specify a particular element of the domain.  There is a third variety of term, known as a <em>function expression</em>, that will be discussed in a later section. 
+        
+        <h2>Predicates in mathematics</h2>
+        
+        <p>Mathematics defines a rich collection of predicates that one would already be familiar with.  However, the fact that they are predicates may not be apparent because their form can be quite different to that we have seen in the formulas above.  For example, the predicate \(Q\) appears in formulas beginning with the predicate name, followed by a list of terms enclosed in parentheses.  This is known as <span class='defn'>prefix notation</span>, because the predicate's name (\(Q\)) appears before the predicate's terms.  However, most binary predicates in mathematics are written using <span class='defn'>infix notation</span>, where the predicate name or symbol lies between the two terms.  For example, the 'is less than' predicate (identical to \(Q\)) is represented in mathematics by the symbol \(\lt\), with the first term lying to the left of the \(\lt\), and the second term lying to the right.  That is, \(a \lt b\) is the same as \(Q(a,b)\).  Using this form, we can write:</p>
+        
+        <p class='indent1 of'>\(R(x,y,z) \equiv (x \lt y \wedge y \lt z) \to x \lt z\)</p>
+        
+        <p>Many predicates in mathematics are specific to a certain domain.  Predicates such as \(\lt\), \(\gt\), \(\le\) and \(\ge\) are specific to domains where an order exists amongst the elements.  This obviously includes numbers, but can apply to other domains, such as the domain of words (alphabetical order) or the domain of soldiers in an army (where rank may be used to define an order).  However, there is one binary predicate that, being fundamental to logic itself, pervades all of mathematics: the <span class='defn'>equality predicate</span>.  Written as \(a = b\), this is a familiar binary predicate which evaluates true if and only if \(a\) and \(b\) represent the same element within a domain.</p>
+        
+        <p>Many predicates in mathematics are actually derived from simpler predicates.  For example, we can define the \(\neq\), \(\gt\), \(\le\) and \(\ge\) as formulas using only the \(=\) and \(\lt\) predicates, as follows:</p>
+        
+        <p class='indent1 of'>
+        \(x \neq y \equiv \neg(x = y)\)<br>
+        \(x \le y \equiv (x \lt y \vee x = y)\)<br>
+        \(x \gt y \equiv \neg(x \lt y \vee x = y) \equiv \neg(x \le y)\)<br>
+        \(x \ge y \equiv \neg(x \lt y) \equiv (x \gt y \vee x = y)\)
+        </p>
+        
+        <h2>Functions</h2>
+        
+        <p>It has already been mentioned that a predicate's terms consist of either variables (when the term is unknown) or constants (when the term is known).  The third and final type of term is known as a <span class='defn'>function expression</span>.  As the name suggests, function expressions are constructed by invoking a <span class='defn'>function</span>.  For now, consider functions merely as a mechanism that take one or more elements of a domain as input, and yields some element of the domain as its output.  Like predicates, functions have a name and accept one or more terms as inputs.  Unlike predicates, functions return an element of the domain rather than a truth value.</p>  
+        
+        <p>Many of the familiar operations of mathematics, such as addition and multiplication, are actually functions.  For example, the <em>addition function</em> over the domain of real numbers will take two real numbers as input, and return their sum as an output.  It uses an infix notation, for example: \(x + y\).  There is a variety of exotic ways in which functions are represented in mathematics.  For example, \(x^y\) represents the <em>exponentiation function</em>, which returns the value of \(x\) multiplied by itself \(y\) times, and \(|x|\) represents the <em>absolute value function</em> that returns the non-negative magnitude of \(x\).  Functions allow us to write formulas very succinctly, exemplified in the following formula:</p>
+        
+        <p class='indent1 of'>\(a^2 + b^2 = c^2\)</p>
+        
+        <p>While it may not look like it, this is actually an atomic formula, because it is actually just a single predicate (the equality predicate).  The term on the left of the equality is a function expression: \(a^2 + b^2\).  The primary function here is the addition function, whose terms \(a^2\) and \(b^2\) are themselves function expressions.  The term \(a^2\) is an exponentiation function expression, which has two terms: the variable a, and the constant 2.  Similarly, the term \(b^2\), and \(c^2\) on the right of the equality, are also exponentiation function expressions.  Functions will be investigated more deeply in the chapter on set theory.</p>
+        
+        <h2>Quantifiers</h2>
+        
+        <p>At this point you may be questioning the purpose of predicates and formulas.  After all, they cannot be evaluated until they have been instantiated with elements of the domain.  But instantiated predicates and formulas are no different to propositions!  Indeed, predicate logic is of no use without logical operators known as <span class='defn'>quantifiers</span>.  Quantifiers allow us to make logical statements that apply over an entire domain of elements, rather than just specific elements.  There are two quantifiers: the universal quantifier (\(\forall\)) and the existential quantifier (\(\exists\)).
+        
+        <h3>Substitution</h3>
+        
+        <p>First, let us introduce a notation that allows us to denote a <span class='defn'>substitution</span>.  A substitution occurs when variables of some formula \(\phi\) are <em>substituted</em> with other terms.  The notation \(\phi[t_1/v_1, t_2/v_2, ..., t_n/v_n]\) represents the formula \(\phi\) after every variable \(v_1\) has been replaced by the term \(t_1\), \(v_2\) has been replaced by \(t_2\), and so on.  Here are some examples for the formula \(\phi = (x \lt y \wedge y \lt z) \to x \lt z\)</p>
+        
+        <p class='indent1 of'>\(\begin{align} \phi[0/x, a/y, b/z] & \equiv (0 \lt a \wedge a \lt b) \to 0 \lt b \\
+        \phi[5/z] & \equiv (x \lt y \wedge y \lt 5) \to x \lt 5 \\
+        \phi[8/x,6/y,4/z] & \equiv (8 \lt 9 \wedge 9 \lt 4) \to 8 \lt 4 \end{align}\)
+        </p>
+        
+        <p>The first example substitutes all instances of the variable \(x\) with the constant term 0, all instances of the variable \(y\) with the variable term \(a\), and all instances of the variable \(z\) with the variable term \(b\).  The second example performs only a single substitution of all variables \(z\) with the constant term 5.  The third example substitutes all variables with constant terms. This final example is the only sentence, the other two formulas are open due to the presence of uninstantiated variables.  Because all predicates in this final example have been fully instantiated, the truth of this formula can be evaluated.</p>
+        
+        <p>There are further restrictions to substitution which are required when we look at formulas containing quantifiers.  We will cover these restrictions after we have discussed quantifiers in detail.</p>
+        
+        
+        <h3>The universal quantifier</h3>
+        
+        
+        At the beginning of this chapter, we identified the inability of propositional logic to make statements about the entire domain of discourse.  For example, consider the domain of all animals.  We have no way of expressing the fact that 'All dogs are mammals'.  The closest we can come is to create two predicates:
+        
+        <p class='indent1 of'>\(D(x)\) = '\(x\) is a dog'<br>
+        \(M(y)\) = '\(y\) is a mammal'
+        </p>
+        
+        and then define the formula \(\phi\):
+        
+        <p class='indent1 of'>\(\phi = D(x) \to M(x)\)</p> 
+        
+        <p>The formula \(\phi\) reads as 'If x is a dog, then x is a mammal'.  But this formula contains variables that have not been instantiated, and therefore its truth is indeterminate.  That is, it is not a logical <em>sentence</em>.  However, if we assigned a unique name to every animal within our domain (a constant), it could be theoretically possible to create a logical sentence expressing that all dogs are mammals.  For each animal that exists, assign it a constant \(c_i\), where \(i\) is a number from 1 to \(n\), \(n\) being the total number of animals in our domain.  The following logical sentence \(\psi_1\) claims that every dog is a mammal:
+        
+        <p class='indent1 of'>\(\psi_1 = \big(D(c_1) \to M(c_1)\big) \wedge \big(D(c_2) \to M(c_2)\big) \wedge \ldots \wedge \big(D(c_n) \to M(c_n)\big)\).</p>
+         
+        <p>The ellipsis '\(\ldots\)' indicates that most of the formula has been ommited for brevity.  It should be obvious why this method is not desirable.  We would have to uniquely assign a constant to every animal that exists, a practical impossibility given that there are trillions of animals on Earth.  Furthermore, the formula would be so large that it would easily exceed the memory capacity of an average computer's memory just to store it!  And what about infinite domains?  This method would not even theoretically be possible.</p>
+        
+        <p>The universal quantifier is a logical operator that allow us to achieve what we cannot do with our existing logical operators.  For any formula \(\chi\), the formula \(\forall x (\chi)\) can be considered to be logically equivalent to the conjunction of all possible substitutions \(\chi[c/x]\), where \(c\) is some element of the domain.  That is:
+        
+        <p class='indent1 of'>\(\forall x (\chi) \equiv \chi[c_1/x] \wedge \chi[c_2/x] \wedge \ldots\).</p>  
+        
+        <p>The ellipsis indicates that this conjunction may be finite or infinite.  The universal quantifier consist of the upside-down A symbol (\(\forall\)), followed by the variable that the quantification applies to.  We can rewrite our formula \(\psi_1\) above as \(\psi_2\), finally allowing us to express, in a convenient and concise way, that all dogs are mammals.</p>
+        
+        <p class='indent1 of'>\(\psi_2 = \forall x (\phi) \equiv \forall x(D(x) \to M(x))\)</p>
+        
+        <p>That \(\psi_1\) and \(\psi_2\) are equivalent follows from the logical equivalence above</p>
+        
+        <p class='indent1 of'>\(\forall x(\phi) \equiv \phi[c_1/x] \wedge \phi[c_2/x] \wedge \ldots \equiv \big(D(c_1) \to M(c_1)\big) \wedge \big(D(c_2) \to M(c_2)\big) \wedge \ldots\)</p>
+        
+        <p>It follows that \(\psi_2\) is a sentence, since \(\psi_2 \equiv \big(D(c_1) \to M(c_1)\big)\) \(\wedge \big(D(c_2) \to M(c_2)\big) \wedge \ldots\).  That is, all variables have been instantiated.</p>
+        
+        <h4>Quantifier scope: bound and free variables</h4>
+        
+        <p>The <span class='defn'>scope</span> of a quantifier is that part of a formula over which a quantification applies.  The universal quantifier is a unary operator whose scope is the <em>smallest sub-formula to the right of the quantifier</em>.  For example, in the formula \(\forall x D(x) \to M(x)\), the smallest formula to the right of the universal quantifier would be \(D(x)\), an atomic formula.  Therefore, the quantifier only applies to the formula \(D(x)\), and not to the entire formula \(D(x) \to M(x)\).  Expanding this out by substituting the logical equivalence of the universal quantifier as defined above, makes it equivalent to the following formula.</p>
+        
+        <p class='indent1 of'>\(\big(D(c_1) \wedge D(c_2) \wedge \ldots \big) \to M(x)\)</p>
+        
+        <p>This formula would not be a sentence, as the variable x within the sub-formula M(x) has not been instantiated.  We can control the scope of quantifers with the appropriate use of parentheses, as we did above with formula \(\psi_2\).  The parentheses around \(D(x) \to M(x)\) makes this formula the smallest sub-formula.</p>
+        
+        <p>When a variable is within the scope of a quantifier that quantifies over that particular variable, we say that the variable is <span class='defn'>bound</span>.  Otherwise, the variable is said to be <span class='defn'>free</span>.  Given these definitions, it should be obvious that the following statement holds:</p>
+          
+        <p class='indent1 of' style='font-size: 120%'>A formula is a sentence if and only if all variables within the formula are bound<p>
+        
+        <p>Any variable that is free is not instantiated.  This leaves the truth of the formula indeterminate, and hence it is not a sentence</p>
+        
+        <h4>Formulas with multiple universal quantifiers</h4> 
+        
+        <p>The formula \(\psi_2 = \forall x(D(x) \to M(x))\) is a sentence in only one variable.  Typically, sentences is one variable which are universally quantified are used to describe <span class='defn'>properties</span> of elements within a domain.  In this case, we ascribe all dogs the property of being mammals.  To describe relationships between elements of the domain, we typically require two or more variables.  For example, over the domain of all people, we could describe the 'offspring' relationship as follows:</p>
+        
+        <p class='indent1 of'>If x is the mother of y, or x is the father of y, then y is the offspring of x</p>
+        
+        <p>This is a statement that holds true regardless of who we substitute for x and y.  This indicates that a universal quantification holds for both variables.  Let's define the following predicates:</p>
+        
+        <p class='indent1 of'>\(M(x,y)\) = '\(x\) is the mother of \(y\)'<br>
+        \(F(x,y)\) = '\(x\) is the father of \(y\)'.<br>
+        \(O(x,y)\) = '\(x\) is the offspring of \(y\)'.
+        </p>
+        
+        <p>We can express the relationship above between mothers, fathers and offspring as the following sentence:</p>
+        
+        <p class='indent1 of'>\(\forall x(\forall y((M(x,y) \vee F(x,y)) \to O(y,x)))\)</p>
+        
+        <p>A universal quantifier is required for each variable, in order to bind the variables and make the formula a sentence.  If a formula contains only universal quantifiers, and no existential quantifiers (which we discuss later), then the ordering of the quantifiers does not matter.  This means we can bundle all quantifiers together at the beginning of the formula in any order.</p>
+        
+        <p class='indent1 of'>\(\forall x(\forall y((M(x,y) \vee F(x,y)) \to O(y,x))) \equiv \forall y(\forall x((M(x,y) \vee F(x,y)) \to O(y,x)))\)</p>
+        
+        <p>Because the order is irrelevant, we can remove some extraneous parentheses and still preserve the same meaning:</p>
+        
+        <p class='indent1 of'>\(\forall x\forall y((M(x,y) \vee F(x,y)) \to O(y,x))\)</p>
+        
+        <h4>Truth of sentences with quantifiers</h4>
+        
+        <p>It should be emphasized that sentences containing quantifiers are the same as any other sentence: they will evaluate to either true or false.  For example, consider the following law of algebra:</p>
+        
+        <p class='indent1 of'>\(\forall a \forall b \forall c(a = b \to (a + c) = (b + c))\)</p>
+        
+        <p>This is the law that allows us to add the same term to both sides of an equation when performing algebraic manipulation.  You can probably see, at least intuitively, that this is true.  We will write a proof that proves that this is true (that is, we can derive it from the basic axioms of arithmetic) in a later chapter.  However, if we define the predicate \(Z(a)\) = '\(a\) is an integer', then the following sentence is false:
+        
+        <p class='indent1 of'>\(\rho = \forall a (Z(a) \to \frac{a}{a} = 1)\)</p>
+        
+        <p>Essentially, this formula claims that every integer, when divided by itself, yields the value one.  At first glance this may seem true.  However, remember that the universal quantifier in this sentence is asserting that this formula is true <em>for all</em> \(a\).  If we can find just one value for \(a\) that does not satisfy this claim, then the entire claim is false.  The integer zero violates this rule. \(Z(0)\) is true, but \(\frac{0}{0} = 1\) is false, because division by zero is undefined.  Therefore, the sentence \(\rho\) is false.</p>
+        
+        <h3>The existential quantifier</h3>
+        
+        <p>Universal quantifiers are so called because they describe universal characteristics of a domain.  That is, properties and relationships that apply to <em>all</em> elements within a domain.  Sometime we just want to assert that something is true for <em>some</em> elements of the domain.  By some, we mean <em>at least one</em>.  That is, a property or relationship <em>exists</em> within the domain.  The existential quantifier (\(\exists\)) serves this purpose.  Like the universal quantifier, the existential quantifier specifies a variable to be quantified, and has a scope.  As an example, if we wanted to make a claim such as 'There is at least one woman who is greater than two metres tall' within the domain of humans, we could define the following predicates:</p>
+        
+        <p class='indent1 of'>\(W(x)\) = '\(x\) is a woman'<br>
+        \(T(x)\) = '\(x\)'s height is greater than 2m.'
+        </p>
+        
+        <p>and then claim the following sentence:</p>
+        
+        <p class='indent1 of'>\(\exists x(W(x) \wedge T(x))\)</p>
+        
+        <p>This sentence claims that, within the domain of humans, there is at least one such element (person) who is both a woman, and has a height exceeding 2m.  For any formula \(\chi\), the formula \(\exists x (\chi)\) can be considered to be logically equivalent to the <em>disjunction</em> of all possible substitutions \(\chi[c/x]\), where \(c\) is some element of the domain.  That is:</p>
+        
+        <p class='indent1 of'>\(\exists x (\chi) \equiv \chi[c_1/x] \vee \chi[c_2/x] \vee \ldots\).</p>
+        
+        <p>That is, if we substitute each element in the domain within the formula, and at least one such formula is true, then the entire sentence is true.  The existential quantifier operator has the same rules for scope as the universal quantifier.  Multiple existential quantifiers can be applied in the same way as universal quantifiers; the ordering of the quantifiers is unimportant.  For example, defining the predicate \(L(x,y)\) = '\(x\) loves \(y\)', the following formulas are equivalent, which can be interpreted to mean 'There exists at least two people, who mutually love each other'.
+        
+        <p class='indent1 of'>\(\exists x\exists y(L(x,y) \wedge L(y,x) \wedge x \neq y)\)<br>
+        \(\exists y\exists x(L(x,y) \wedge L(y,x) \wedge x \neq y)\)
+        </p> 
+        
+        <p>The condition \(x \neq y\)  is necessary.  Without it, it is possible that \(x\) and \(y\) may be the same person.  That is, a person that loves themselves would make the formula true, thereby not guaranteeing the existence of a mutually loving pair.</p>
+        
+        <p>The existential quantifier can be defined in terms of the universal quantifier, and vice versa, as follows:</p>
+        
+        <p class='indent1 of'>\(\exists x \phi \equiv \neg \forall x(\neg \phi)\)<br>
+        \(\forall x \phi \equiv \neg \exists x(\neg \phi)\)
+        </p>
+        
+        <p>This actually a consequence of the meaning of the existential and universal quantifiers, and the generalized De Morgan's laws.</p>
+        
+        <p class='indent1 of'>\(\phi_1 \wedge \phi_2 \wedge \ldots \equiv \neg(\neg \phi_1 \vee \neg \phi_2 \vee \ldots)\)<br>
+        \(\phi_1 \vee \phi_2 \vee \ldots \equiv \neg(\neg \phi_1 \wedge \neg \phi_2 \wedge \ldots)\)
+        </p>
+        
+        <p>This relationship between the existential and universal quantifiers can be examined intuitively through the following examples.  Saying that 'All dogs are mammals' is equivalent to saying that 'It is not true that there exists a dog that is not a mammal'.  Similarly, saying that 'Some mammals are dogs' is the same as saying 'It is not true that all mammals are not dogs'.</p>
+        
+        <h3>Mixing universal and existential quantifiers</h3>
+        
+        <p>In this section, we provide some examples of formulas that mix universal and existential quantifiers, and discuss their meaning.  We begin by defining the following predicate over the domain of living humans:</p>
+        
+        <p class='indent1 of'>\(L(x, y)\) := '\(x\) loves \(y\)'</p>
+        
+        <p>Using only this predicate, we will construct some sentences that combine a universal and existential quantifier, and consider their meaning.  We begin with the following sentence:</p>
+        
+        <p class='indent1 of'>\(\phi_1 = \forall x\exists y(L(x,y))\)</p>
+        
+        <p>We could interpret this as 'For every person \(x\), there exists at least one person \(y\), such that \(x\) loves \(y\)'.  This is equivalent to saying that 'everybody loves someone', or more correctly 'everyone loves at least one person'.  Note that this does <em>not</em> state that every person loves someone <em>else</em>. In a purely narcissistic world, where everyone only loved themselves (when \(x\) = \(y\)), this sentence would hold true.  To preclude this particular case, we could amend the sentence to be \(\forall x\exists y(L(x,y) \wedge x \neq y)\).</p>
+        
+        <p>Determining the truth of \(\phi_1\) may be difficult, if not impossible, but if we can find at least one person that does not love anyone, then this sentence is false.  This would then make the negation of \(\phi_1\) true:</p>
+        
+        <p class='indent1 of'>\(\neg \phi_1 = \neg \forall x\exists y(L(x,y))\)</p>
+        
+        <p>This could be read as 'It is not true that everybody loves someone'. With a little bit of manipulation, we can find an equivalent formula for this negated sentence.  Remember that:</p>
+        
+        <p class='indent1 of'>\(\forall x \phi \equiv \neg \exists x(\neg \phi)\).</p>
+        
+        <p>Applying this logical equivalence to our sentence, as well as the double negation law, we get:</p> 
+        
+        <p class='indent1 of'>\(\neg \forall x\exists y(L(x,y)) \equiv \neg \neg \exists x(\neg \exists y(L(x,y))) \equiv \exists x(\neg \exists y(L(x,y)))\)</p>
+        
+        <p>Going further, we use the complementary fact that:</p> 
+        
+        <p class='indent1 of'>\(\exists x \phi \equiv \neg \forall x(\neg \phi)\).</p>
+        
+        <p>Again, applying this logical equivalence to our sentence, as well as the double negation law, we get:</p>
+        
+        <p class='indent1 of'>\(\exists x(\neg \exists y(L(x,y))) \equiv \exists x (\neg \neg \forall y(\neg (L(x,y))) \equiv \exists x \forall y(\neg (L(x,y)))\)</p>
+        
+        <p>This translates to 'There exists a person \(x\), such that for all people \(y\), \(x\) does not love \(y\)'.  In other words, there are people who do not love anyone, including themselves.  Obviously the formulas \(\neg \forall x\exists y(L(x,y))\) and \(\exists x \forall y(\neg (L(x,y)))\) are mutually exclusive; they cannot both be true as we have just shown that they are negations of each other.  When a quantified sentence is negated, we can effectively propagate the negation inwards through the quantifiers, changing universal quantifiers to existential quantifiers, and vice versa, as we go through.</p>
+        
+        <p>Let's now consider the following formula:</p>
+        
+        <p class='indent1 of'>\(\phi_2 = \exists x\forall y(L(x,y))\)</p>
+        
+        <p>This sentence is the same as \(\phi_1\), but with the ordering of the quantifiers switched around.  This example demonstrates that ordering is important when mixing universal quantifiers with existential quantifiers.  To see why, let's read it out: 'There exists a person \(y\) such that for all people \(x\), \(x\) loves \(y\)'.  In other words, there exists a person that is loved by everyone.  Note that it must also be true that this person, who is loved by everyone, <em>must also love themselves</em>.  Otherwise, when \(x\) = \(y\), \(L(x,y)\) is false, which makes the entire sentence false.  We could eliminate this caveat by amending the formula thus: \(\exists x\forall y(L(x,y) \vee x = y)\).</p>
+        
+        <p>By switching the order, we have altered the formula from meaning 'everybody loves someone' to 'someone is loved by everyone'.  These two statements are quite different in meaning.
+        The negation of this statement is \(\neg \exists y\forall x(L(x,y))\), or 'It is not true that somebody is loved by everyone'.  Using the same equivalence used above, we know the following is true:</p>
+        
+        <p class='indent1 of'>\(\neg \exists y\forall x(L(x,y)) \equiv \forall y\exists x(\neg L(x,y))\)</p>
+        
+        <p>This is the same as saying 'For every person, there is someone that does not love them'.  It should make sense that this is equivalent to 'It is not true that somebody is loved by everyone'.</p>
+        
+        <p>The ordering of quantifiers is important, but just as important is ensuring you have quantified the correct variable.  Instead of writing \(\forall x\exists y(L(x,y))\), what if we had written</p>
+        
+        <p class='indent1 of'>\(\phi_3 = \forall y\exists x(L(x,y))\)</p>
+        
+        <p>This sentence is the same as the first sentence we introduced, but with the ordering of the variables on each quantifier switched around.  The meaning of this sentence is now: 'For all people y, there exists a person x, such that x loves y'.  By changing the variables on the quantifier around, we have converted the formula from meaning 'everybody loves someone' to 'everybody is loved by someone'.  These two statements are subtly different in meaning.  In the case of \(\phi_1\), everyone must love at least one other person (even if it is just themselves).  But in the case of \(\phi_2\), it is possible that there are people that love no-one (including themselves), but are loved by someone else.</p>
+        
+          
+        <p>The negation of this statement is \(\neg \forall y\exists x(L(x,y))\).  This reads as: 'It is not true that everyone is loved by someone'.  Using the same equivalence used above, we know the following is true</p>
+        
+        <p class='indent1 of'>\(\neg \forall y\exists x(L(x,y)) \equiv \exists y\forall x(\neg L(x,y))\)</p>
+        
+        <p>That is, saying that 'It is not true that everyone is loved by someone' is equivalent to saying 'There exists some person who is not loved by anyone'.</p>  
+        
+        <p>Finally, we examine one last possibility, where we switch the quantifier operators around on the previous formula \(\phi_3\):</p>
+          
+        <p class='indent1 of'>\(\phi_4 = \exists x\forall y(L(x,y))\)</p>
+        
+        <p>This can be read as 'There exists some person \(x\) who, for all people \(y\), \(x\) loves \(y\)'.  In other words, there exists someone who loves everyone (including themselves).  The negation of this would be 'It is not true that there is someone that loves everyone'.
+        
+        <p class='indent1 of'>\(\neg \exists x\forall y(L(x,y)) \equiv \forall x\exists y(\neg L(x,y))\)</p>
+        
+        <p>The formula to the right is an alternative expression of this fact: 'For every person \(x\), there exists some person \(y\), such that \(x\) does not love \(y\)'.  That is: 'Everyone has someone they don't love'.</p>
+        
+        <h4>Uniqueness quantifier</h4>
+        
+        <p>The existential quantifier only asserts the existence of some property or relationship, but does not give any information on <em>how many</em> exist.  Sometimes we want to assert that there is a unique property or relationship.  For example, consider the following predicate</p>
+        
+        <p class='indent1 of'>\(I(x,y)\) = '\(x + y = 0\)'
+        
+        <p>We know that there is only one value of \(y\) that can be added to some value \(x\), to make the sum zero.  This value \(y\) is the <span class='defn'>additive inverse</span> of \(x\), more commonly known as <em>negative \(x\)</em> or \(-x\).  The additive inverse of \(x\) is unique to \(x\), with each \(x\) having a different additive inverse.  For example, the additive inverse of 5 is -5.  For -2, it is 2.  We could write:</p>
+        
+        <p class='indent1 of'>\(\forall x\exists y(I(x,y))\)</p>
+        
+        <p>However, this does not convey the uniqueness of \(y\), only that \(y\) exists, and that there may be more than one value of \(y\) that makes this sentence true.  Many texts define a uniqueness quantifier (\(\exists !\)) as follows:</p>
+        
+        <p class='indent1 of'>\(\exists! x(\chi) \equiv \exists x(\chi \wedge \forall y(\chi[y/x] \to x = y))\)</p>
+        
+        <p>This formula is only true if we find some value \(x\) that satisfies \(\chi\), and it also satisfies the formula \(\forall y(\chi[y/x] \to x = y)\).  This last formula is the key part to checking that the value \(x\) is unique.  Once we find some value \(x\) that satisfies \(\chi\), we then test that it is the only value that satisfies \(\chi\) by checking through all the elements of the domain (the \(\forall y\)) to find every value \(y\) that satisfies \(\chi\) when we substitute it for \(x\).  If we find one, it should be exactly the same as \(x\) (which we test with the \(x = y\)).  If it is not, then \(x\) is not unique, and the whole formula becomes false.  We can now express the desired uniqueness property of the additive inverse as follows:</p>
+        
+        <p class='indent1 of'>\(\forall x\exists !y(I(x, y))\)</p>
+        
+        <p>which expands out to something like this:</p>
+        
+        <p class='indent1 of'>\(\forall x\exists y(I(x, y) \wedge \forall z(I(x, z) \to y = z))\)</p>
+        
+        <p>We can also assert the uniqueness of the <span class='defn'>additive identity</span>.  The additive identity of a number \(x\) is some number \(y\), such that \(x + y = x\).  Of course, this is the number zero.  The difference here is that the additive identity is not only unique to some number \(x\), it is in fact the same for every number \(x\).  That is, 1 + 0 = 1, 2 + 0 = 2, and so forth.  Let the predicate \(K\) be:</p>
+        
+        <p class='indent1 of'>\(K(x, y)\) = '\(x + y = x\)'</p>
+        
+        <p>We express the uniqueness a little differently, this time swapping the universal and uniqueness quantifier around:</p>
+        
+        <p class='indent1 of'>\(\exists !y \forall x(K(x,y))\)</p>
+        
+        <p>This is a stronger statement, asserting that there is only one additive identity, and it is the same for every number, rather than one additive identity for each number.</p>
+        
+        <h2>Rules of inference for predicate logic</h2>
+        
+        <p>Predicate logic inherits the same rules of inference that we covered in the chapter on propositional logic.  This is because propositional logic is simply a subset of predicate logic; it is predicate logic restricted to 0-ary predicates.  Hence, there is no need for quantifiers or terms.  However, predicate logic requires additional rules of inference necessary for our newly introduced quantifiers.  We also need rules for handling the equality predicate, the only predicate 'built in' to logic.  In the previous chapter, we proved that the rules of inference were valid by creating truth tables that demonstrate their validity.  In predicate logic, we do not have this ability, as quantifiers can range over a (potentially infinite) domain.  We cannot possibly list all cases.  This does not mean that the validity of these new rules of inference cannot be proven.  However, such proofs are beyond the scope of our ability at this point.  These proofs are covered in studies of metalogic, that require a foundation in set theory.</p>
+        
+        <h3>Additional restrictions on substitution</h3>
+        
+        <p>Consider again the substitution notation that we have defined above.  Recall that our original definition of the substitution of all variables \(x\) with the term \(t\) within the formula \(\phi\), denoted as \(\phi[t/x]\), blindly replaced <em>all</em> variables \(x\) with the term \(t\).  However, when a formula contains quantifiers, there are restrictions on substitution that must be obeyed.  We define them here:</p>
+        
+        <p class='indent1 of' style="font-size: 120%">The formula \(\phi[t/x]\) represents the formula \(\phi\) after every <em>free</em> variable \(x\) is replaced with the term \(t\).  Furthermore, \(t\) must be <span class='defn'>substitutable</span> within \(\phi\), otherwise the substitution is undefined.  A term \(t\) is substitutable within \(\phi\) as long as all variables that may be contained within \(t\) do not not become bound by a quantifier in \(\phi\) as a result of a substitution.</p>
+        
+        <p>The first condition is pretty easy to understand.  When scanning the formula for variables \(x\) to replace, we only replace those that are free (not bound to a quantifier).  It is possible that a formula may contain a mix of free and bound variables with the same name. The following contrived example demonstrates the concept:</p>
+        
+        <p class='indent1 of'>\(\forall x(x = 0 \to \forall x(x = x))\)</p>
+        
+        <p>In this formula, we have three occurrences of the variable \(x\).  While each occurrence has the same name, there are actually <em>two different variables</em> present.  The first occurrence of \(x\) is bound by the outermost universal quantifier, with the remaining two bound by the inner universal quantifier.  The first occurrence is actually a different variable to the second and third occurrences; the variable names have just been reused.  This is generally a poor practice; we could avoid confusion by using a different name for one of the variables.  However, it is perfectly legal syntax to do this.</p>
+        
+        <p>Each occurrence of the variable \(x\) is bound in this example, which means any substitution of variable \(x\) performed on this formula will do nothing.  That is:</p>
+        
+        <p class='indent1 of'>\(\forall x(x = 0 \to \forall x(x = x))[t/x] \equiv \forall x(x = 0 \to \forall x(x = x))\)</p>
+        
+        <p>As we will see shortly, there is an inference rule (known as <em>universal instantiation</em>) that allows us to strip the universal quantifier at the beginning of a formula, substituting all previously bound variables with some term \(t\).  Applying this rule to the above formula would give:
+        
+        <p class='indent1 of'>\((x = 0 \to \forall x(x = x))[t/x] \equiv t = 0 \to \forall x(x = x))\)</p>
+        
+        <p>Note that only the first variable \(x\) has become free, and therefore is the only variable we can perform a substitution on. The remaining variables are still bound.</p>
+        
+        <p>To understand what it means to be <em>substitutable</em>, let's consider the formula \(\psi\), defined as:</p>
+        
+        <p class='indent1 of'>\(\psi = \forall x\exists y(L(x,y))\)</p>
+        
+        <p> You will be familiar with this formula in the previous section, asserting that 'everyone loves someone'.  Applying universal instantiation on the formula \(\psi\), we could strip the universal quantifier, and substitute all free variables \(x\) with some other term \(t\).  That is, perform the substitution \(\exists y(L(x,y))[t/x]\).  But what if the term \(t\) we chose was the variable \(y\)?  We would have:</p>
+        
+        <p class='indent1 of'>\(\exists y(L(x,y))[y/x] \equiv \exists y(L(y,y))\)</p>
+        
+        <p>From the general statement 'everyone loves someone', we have somehow concluded that 'there is a person that loves themselves'.  It is obvious that this must be a faulty inference, since our original formula made no guarantee that someone exists that loves themselves, it only said that everyone loves <em>someone</em>.  The fault occurred because we chose to replace free variable \(x\) with the term \(y\) within the scope of a quantifier which binds \(y\).  This violates the condition that the term must be substitutable within the formula, and therefore is an illegal substitution.</p>
+        
+        
+        <h3>Inference rules of equality</h3>
+        
+        <p>The two inference rules for equality are quite easy to comprehend, and may seem so obvious that there should be no reason to even declare them at all.  This is only because we already have so much familiarity with equality that its meaning seems to need no formal description.  Nevertheless, we need these rules of inference as a way of deriving other properties of the equality predicate.  The first rule is simple; known as <span class='defn'>equality introduction</span> (abbreviated to <span class='defn'>\({=}I\)</span>):</p>
+        
+        <p class='indent1 of' style='font-size: 120%'>\(\vDash x = x\)</p>
+        
+        <p>This rule is sometimes also known as the <em>reflexive law of equality</em>.  It should be fairly obvious that, regardless of what \(x\) is, that it should be equal to itself, and requires no premises.  The second rule should also seem sensible, it is known as <span class='defn'>equality elimination</span> (abbreviated to <span class='defn'>\({=}E\)</span>):</p>
+        
+        <p class='indent1 of' style='font-size: 120%'>\(a = b, \phi[a/x] \vDash \phi[b/x]\)</p>
+        
+        <p>If the formula \(a = b\) is true, and the formula \(\phi[a/x]\) is true, then the formula \(\phi[b/x]\) is true.  Remember, the formula \(\phi[a/x]\) indicates a formula \(\phi\) that has all free variables \(x\) substituted with the term \(a\).  This rule is simply saying that if we have two values \(a\) and \(b\) that are the same, and substituting the value \(a\) for \(x\) in \(\phi\) gives a true formula, then we can also perform the same substitution with \(b\) and also have a true formula.  Note that we don't literally mean that the variable in \(\phi\) must be named \(x\); it is just a representative for some variable contained within \(\phi\).  For example, if \(p = q\) is true, and it is true that \(p^2 = 1\), then \(q^2 = 1\) is also true</p>
+        
+        <p>From these two rules (\({=}I\) and \({=}E\)), it is a simple matter to prove the symmetric and transitive laws of equality.  We begin with the former, which can be expressed as \((a = b) \equiv (b = a)\)</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(a = b\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(a = a\)</td>
+                <td style="padding-left: 50px;">\({=}I\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(b = a\)</td>
+                <td style="padding-left: 50px;">\({=}E: 1, 2\)</td>
+            </tr>
+        </table></div>
+        
+        <p>The proof is extremely simple, but how we obtained line 3 may require some explanation.  To invoke the \({=}E\) rule, we need the formula \(a = b\) to be true, and some formula \(\phi[a/x]\) to be true.  The first formula (a = b) we assume to be true; it is our assumption on line 1.  But what is \(\phi\)?  It is whatever we choose, as long as we can show that \(\phi[a/x]\) is true.  Let \(\phi\) be the formula \(x = a\).  Then \(\phi[a/x]\) is \(a = a\).  We know that this is true because of the \({=}I\) rule on line 2.  We can therefore conclude that \(\phi[b/x]\) is true.  That is, our conclusion is \(b = a\).</p>  
+        
+        <p>Because we have not discharged our assumption of \(a = b\), this must remain as a premise to our sequent that concludes \(b = a\).  That is: \(a = b \vDash b = a\).  Showing the reverse, that \(b = a \vDash a = b\) is trivial; the form of the proof is the same, with an assumption of \(b = a\) and \(\phi\) as \(x = b\).  Then apply the \({=}E\) rule: \(b = a, \phi[b/x] \vDash \phi[a/x]\).  It has now been shown that \((a = b) \equiv (b = a)\).</p>
+        
+        <p>Now, lets prove the transitive property of equality.  That is, \(a = b, b = c \vDash a = c\).</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan=2>\(a = b\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black">\(b = c\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(b = a\)</td>
+                <td style="padding-left: 50px;">\(SymmE: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td>\(a = c\)</td>
+                <td style="padding-left: 50px;">\({=}E: 3, 2\)</td>
+            </tr>
+        </table></div>
+        
+        <p>We begin with our two assumptions: \(a = b\) and \(b = c\) on lines 1 and 2 respectively.  Line 3 uses our previous proof of the symmetry of equality to derive that \(b = a\) from line 1.  Finally, we conclude \(a = c\) on line 4 using the \({=}E\) rule.  The first premise to this rule is \(b = a\) (from line 3).  Then, let \(\phi\) be the formula \(x = c\).  We know that \(\phi[b/x]\), or \(b = c\), is true as it is an assumption on line 2.  Therefore, we can conclude that \(\phi[a/x]\) is true, or \(a = c.\)  Therefore: \(a = b, b = c \vDash a = c\).</p>
+        
+        <p>Note that the formulas we have derived are not sentences, but it's clearly obvious that these rules should apply universally.  That is, we should be able to prove the formulas \(\forall x\forall y(x = y \leftrightarrow y = x)\) (symmetry of equality), and \(\forall x\forall y\forall z((x = y \wedge y = z) \to x = z)\).  The final four rules that follow will allow us to do this, as they dictate when we can add and remove quantifiers from formulas.</p>
+        
+        <h3>Universal instantiation</h3>
+        
+        <p>The rule of <span class='defn'>universal instantiation</span>, also known as <span class='defn'>\(\forall\)-elimination</span> or <span class='defn'>\({\forall}E\)</span>, is the first of the rules of inference dealing with quantifiers.  It is defined as follows:</p>
+        
+        <p class='indent1 of' style='font-size: 120%'>\(\forall x (\phi) \vDash \phi[t/x]\)</p>
+        
+        <p>In other words, if all elements in a domain satisfy a formula \(\phi\), then it logically follows that any <em>specific</em> element of the domain will satisfy \(\phi\).  For example, over the domain of natural numbers, it is certainly true that all numbers are greater than or equal to zero.  That is:</p>
+        
+        <p class='indent1 of'>\(\forall x(x \ge 0)\)</p>
+        
+        <p>From the \({\forall}E\) rule, we can substitute <em>any</em> term for \(x\), and have a true formula.  The term may be any constant, variable or function expression defined for the natural numbers</p>
+        
+        <p class='indent1 of'>\(0 \ge 0\)<br>
+        \(1 \ge 0\)<br>
+        \(2 \ge 0\)<br>
+        \(t \ge 0\)<br>
+        \(t^2 \ge 0\)<br>
+        etc...
+        </p>
+        
+        <p>We will use the \({\forall}E\) rule extensively in the following sections.</p>
+        
+        <h3>Existential generalization</h3>
+        
+        <p>The rule of <span class='defn'>existential generalization</span>, also known as <span class='defn'>\(\exists\)-introduction</span> or <span class='defn'>\({\exists}I\)</span>, is defined as follows:</p>
+        
+        <p class='indent1 of' style='font-size: 120%'>\(\phi[t/x] \vDash \exists x\phi\)</p>
+        
+        <p>Consider the example of the formula \(\phi = (x^2 = 25)\) within the domain of natural numbers.  If we can find at least one value to substitute for \(x\) to make this \(\phi\) true, then we should be able to conclude \(\exists x\phi \equiv \exists x(x^2 = 25)\).  After all, this is the meaning of an existentially quantified formula.  Clearly, such a value exists that makes the formula true:</p>
+        
+        <p class='indent1 of'>\(\phi[5/x] \equiv (x^2 = 25)[5/x] \equiv 5^2 = 25\)</p>
+        
+        <p>The \(\exists I\) rule allows such a conclusion: since \(\phi[5/x]\) is true, it follows that \(\exists x \phi\) is true.</p>
+        
+        <p>The following example proves a somewhat interesting result about our system of logic that is a consequence of the inference rules we have covered so far.  In our particular system of logic, we may not have a domain that is empty, since we can prove:</p>
+        
+        <p class='indent1 of'>\(\exists x(x = x)\)</p>
+        
+        <p>That is, there exists at least one element in the domain which satisfies the formula \(x = x\).  Since any element satisfies this formula (from the \({=}I\) rule), it follows that such a proof is a declaration that our domain cannot be empty.  The proof is quite simple:</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td>1.</td>
+                <td>\(a = a\)</td>
+                <td style="padding-left: 50px;">\({=}I\)</td>
+            </tr>
+            <tr>
+                <td>2.</td>
+                <td>\(\exists x(x = x)\)</td>
+                <td style="padding-left: 50px;">\({\exists}I: 1\)</td>
+            </tr>
+        </table></div>
+        
+        <p>Because the formula \((x = x)[a/x] \equiv a = a\) is true from the \({=}I\) rule, it follows that \(\exists x (x = x)\) is true.</p>
+        
+        
+        <h3>Universal generalization</h3>
+        
+        <p>The rule of <span class='defn'>universal generalisation</span>, often known as <span class='defn'>\(\forall\)-introduction</span> or <span class='defn'>\({\forall}I\)</span>, is defined as follows:</p>
+        
+        <p class='indent1 of' style='font-size: 120%'>\(\phi[t/x] \vDash \forall x \phi\) (the term \(t\) must not be present in any undischarged assumptions in the derivation of \(\phi\)</p>
+        
+        <p>For example, if we know that the formula \(P(a)\) is true, for some \(a\), we can conclude that \(P\) is true for <em>any</em> value that we supply as a parameter to \(P\).  This may seem like faulty logic. Consider the formula \((x \lt 4)[3/x] \equiv 3 \lt 4\), which we know is true for the natural numbers.  It should not be possible to conclude that \(\forall x(x \lt 4)\).  We are saying that every number is less than four!  This is where the condition ensures we do not make such a faulty inference.  That is, the following argument is invalid, because the condition of the \({\forall}I\) rule has been breached:</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(3 \lt 4\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(\forall x(x \lt 4)\)</td>
+                <td style="padding-left: 50px;">Wrong!  The term \(3\) is present in an undischarged premise.</td>
+            </tr>
+        </table></div>
+        
+        <p>With the addition of this rule, it is now possible to construct our universally quantified formulas for the symmetry and transitivity of equality, as follows:</p>
+        
+        <p><span class='defn'>Symmetry of equality</span></p>
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(a = b\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(a = a\)</td>
+                <td style="padding-left: 50px;">\({=}I\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(b = a\)</td>
+                <td style="padding-left: 50px;">\({=}E: 1, 2\)</td>
+            </tr>
+            <tr>
+                <td>4.</td>
+                <td>\(a = b \to b = a\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 1, 3\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td style="border-bottom: 1px solid black">\(b = a\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td>\(b = b\)</td>
+                <td style="padding-left: 50px;">\({=}I\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">7.</td>
+                <td>\(a = b\)</td>
+                <td style="padding-left: 50px;">\({=}E: 5, 6\)</td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td>\(b = a \to a = b\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 5, 7\)</td>
+            </tr>
+            <tr>
+                <td>9.</td>
+                <td>\(a = b \leftrightarrow b = a\)</td>
+                <td style="padding-left: 50px;">\({\leftrightarrow}I: 4, 8\)</td>
+            </tr>
+            <tr>
+                <td>10.</td>
+                <td>\(\forall b(a = b \leftrightarrow b = a)\)</td>
+                <td style="padding-left: 50px;">\({\forall}I: 9\)</td>
+            </tr>
+            <tr>
+                <td>11.</td>
+                <td>\(\forall a \forall b(a = b \leftrightarrow b = a)\)</td>
+                <td style="padding-left: 50px;">\({\forall}I: 10\)</td>
+            </tr>
+        </table></div>
+        
+        <p>Note that at the points where we applied the \(\forall I\) rule, there were no undischarged assumptions, and therefore we did not need to concern ourselves with any conditions.  Secondly, you may have noticed that we have "re-used" the variables \(a\), \(b\) and \(c\) when applying the \(\forall I\) rule.  For example, on line 10, we apply the \(\forall I\) rule to the formula \(a = b \leftrightarrow b = a\) by simply wrapping this formula with a \(\forall b\) quantifier.  This is valid; there is no requirement to "change" the variable, as long as the rule holds.  This can be confirmed by considering line 9 to be \((a = b \leftrightarrow b = a)[b/b]\), which is exactly the same as \(a = b \leftrightarrow b = a\).  Therefore, \(\forall b(a = b \leftrightarrow b = a)\) is valid. The derivation of the law of symmetry of equality we will call \({=}Symm\), so that we may reuse it in the following proof:</p>
+        
+        
+        <p><span class='defn'>Transitivity of equality</span></p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black">\(a = b \wedge b = c\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td>\(a = b\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td>\(b = c\)</td>
+                <td style="padding-left: 50px;">\({\wedge}E: 1\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td>\(b = a\)</td>
+                <td style="padding-left: 50px;">\({=}Symm: 2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td>\(a = c\)</td>
+                <td style="padding-left: 50px;">\({=}E: 4, 3\)</td>
+            </tr>
+            <tr>
+                <td>6.</td>
+                <td>\((a = b \wedge b = c) \to a = c\)</td>
+                <td style="padding-left: 50px;">\({\to}I: 5, \text{d}1\)</td>
+            </tr>
+            <tr>
+                <td>7.</td>
+                <td>\(\forall c((a = b \wedge b = c) \to a = c\))</td>
+                <td style="padding-left: 50px;">\({\forall}I: 6\)</td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td>\(\forall b\forall c((a = b \wedge b = c) \to a = c\))</td>
+                <td style="padding-left: 50px;">\({\forall}I: 7\)</td>
+            </tr>
+            <tr>
+                <td>9.</td>
+                <td>\(\forall a\forall b\forall c((a = b \wedge b = c) \to a = c\))</td>
+                <td style="padding-left: 50px;">\({\forall}I: 8\)</td>
+            </tr>
+        </table></div>
+        
+        
+        <h3>Existential instantiation</h3>
+        
+        The rule of <span class='defn'>existential instantiation</span>, also known as <span class='defn'>\({\exists}\)-elimination</span>, or <span class='defn'>\({\exists}E\)</span>, is defined as follows:
+        
+        <p class='indent1 of' style='font-size: 120%'>If \(\exists x \phi, \phi[t/x] \vDash \psi\), then \(\exists x \phi \vDash \psi\) as long as term \(t\) does not appear in \(\phi\), \(\psi\), or any undischarged assumption of \(\psi\) with the exception of the formula \(\phi[t/x]\).
+        </p>
+        
+        <p>This rule is probably one of the trickiest to grasp, so we use an example in order to demonstrate how it works.  The general form of a proof containing an existential instantiation begins with a formula of the form \(\exists x \phi\).  We then make an assumption that \(\phi[t/x]\) is true, where \(t\) is a new term that is not present in any outstanding assumptions so far.  From this assumption, if we can derive some formula \(\psi\) not containing \(t\), we can discharge the assumption \(\phi[t/x]\), and conclude \(\exists x \psi\).</p>
+        
+        <p>Let's return to the familiar formula \(\forall x \exists y(L(x,y))\), which we remember means "everyone loves someone".  The formula \(\exists y \forall x(L(x,y))\) has the meaning "There is someone who is loved by everyone".  If the second formula is true, then the first formula should also be true.  This is because the second formula also implies that everyone loves someone, it is just more specific in that it states everyone loves the same person.  Therefore, we should be able to prove that:</p>
+        
+        <p class='indent1 of'>\(\exists y \forall x(L(x,y)) \vDash \forall x \exists y(L(x,y))\)</p>
+        
+        <p>Indeed we can, using the \(\exists E\) rule:</p>
+        
+        <div class="of_table"><table class="fitch">
+            <tr>
+                <td style="border-right: 1px solid black">1.</td>
+                <td style="border-bottom: 1px solid black" colspan=2>\(\exists y\forall x(L(x,y))\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">2.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="border-bottom: 1px solid black; width: auto">\(\forall x(L(x,t))\)</td>
+                <td style="padding-left: 50px;">\(P\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">3.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(L(u,t)\)</td>
+                <td style="padding-left: 50px;">\({\forall}E: 2\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">4.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\exists y(L(u,y))\)</td>
+                <td style="padding-left: 50px;">\({\exists}I: 3\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">5.</td>
+                <td style="border-right: 1px solid black">&nbsp;</td>
+                <td style="width: auto">\(\forall x\exists y(L(x,y))\)</td>
+                <td style="padding-left: 50px;">\({\forall}I: 4\)</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid black">6.</td>
+                <td colspan=2>\(\forall x\exists y(L(x,y))\)</td>
+                <td style="padding-left: 50px;">\({\exists}E: 1, 2-5\)</td>
+            </tr>
+        </table></div>
+         
+        <p>The first two lines of the proof are assumptions that will be the formulas \(\exists y \phi\) and \(\phi[t/y]\) that sets up the application of \(\exists I\) later.  That is, \(\phi\) would be \(\forall x(L(x,y))\).  From our second assumption, we can derive the formula \(\forall x\exists y(L(x,y))\).  Note that this formula does not contain the term \(t\), and neither does the formula \(\phi\).  It is also not contained in the undischarged assumption on line 1.  It does appear in the undischarged assumption on line 2.  But this is the exception in the \(\exists I\) rule above, which we may discharge, and conclude \(\forall x\exists y(L(x,y))\).  Hence, we have proven \(\exists y \forall x(L(x,y)) \vDash \forall x \exists y(L(x,y))\).</p>
+        
+    </div>
+</body>
+</html>
